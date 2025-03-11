@@ -1,0 +1,25 @@
+digraph {
+	e9e4807afe4311ef88318cc84b7067bc [label=Start
+ shape=box]
+	e9e06290fe4311ef8a918cc84b7067bc [label="x,y
+" shape=box]
+	e9e48904fe4311ef9f998cc84b7067bc [label="x = 7
+" shape=box]
+	e9e48ec3fe4311efa23b8cc84b7067bc [label="x > 5" shape=box]
+	e9e541bbfe4311efb2a08cc84b7067bc [label="y = x × 2
+" shape=box]
+	e9e54e88fe4311efa8db8cc84b7067bc [label="y = x - 2
+" shape=box]
+	e9e59764fe4311ef91968cc84b7067bc [label=y
+ shape=box]
+	e9e59d9afe4311efb1948cc84b7067bc [label=End
+ shape=box]
+	e9e4807afe4311ef88318cc84b7067bc -> e9e06290fe4311ef8a918cc84b7067bc
+	e9e06290fe4311ef8a918cc84b7067bc -> e9e48904fe4311ef9f998cc84b7067bc
+	e9e48904fe4311ef9f998cc84b7067bc -> e9e48ec3fe4311efa23b8cc84b7067bc
+	e9e48ec3fe4311efa23b8cc84b7067bc -> e9e54e88fe4311efa8db8cc84b7067bc
+	e9e48ec3fe4311efa23b8cc84b7067bc -> e9e541bbfe4311efb2a08cc84b7067bc
+	e9e541bbfe4311efb2a08cc84b7067bc -> e9e59764fe4311ef91968cc84b7067bc
+	e9e54e88fe4311efa8db8cc84b7067bc -> e9e59764fe4311ef91968cc84b7067bc
+	e9e59764fe4311ef91968cc84b7067bc -> e9e59d9afe4311efb1948cc84b7067bc
+}
