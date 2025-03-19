@@ -1,25 +1,25 @@
 digraph {
-	e9e4807afe4311ef88318cc84b7067bc [label=Start
- shape=box]
-	e9e06290fe4311ef8a918cc84b7067bc [label="x,y
-" shape=box]
-	e9e48904fe4311ef9f998cc84b7067bc [label="x = 7
-" shape=box]
-	e9e48ec3fe4311efa23b8cc84b7067bc [label="x > 5" shape=box]
-	e9e541bbfe4311efb2a08cc84b7067bc [label="y = x × 2
-" shape=box]
-	e9e54e88fe4311efa8db8cc84b7067bc [label="y = x - 2
-" shape=box]
-	e9e59764fe4311ef91968cc84b7067bc [label=y
- shape=box]
-	e9e59d9afe4311efb1948cc84b7067bc [label=End
- shape=box]
-	e9e4807afe4311ef88318cc84b7067bc -> e9e06290fe4311ef8a918cc84b7067bc
-	e9e06290fe4311ef8a918cc84b7067bc -> e9e48904fe4311ef9f998cc84b7067bc
-	e9e48904fe4311ef9f998cc84b7067bc -> e9e48ec3fe4311efa23b8cc84b7067bc
-	e9e48ec3fe4311efa23b8cc84b7067bc -> e9e54e88fe4311efa8db8cc84b7067bc
-	e9e48ec3fe4311efa23b8cc84b7067bc -> e9e541bbfe4311efb2a08cc84b7067bc
-	e9e541bbfe4311efb2a08cc84b7067bc -> e9e59764fe4311ef91968cc84b7067bc
-	e9e54e88fe4311efa8db8cc84b7067bc -> e9e59764fe4311ef91968cc84b7067bc
-	e9e59764fe4311ef91968cc84b7067bc -> e9e59d9afe4311efb1948cc84b7067bc
+	a3a5ce6504e111f083e90045e2ab62f6 [label=Start
+ shape=oval]
+	a3a54ede04e111f0833a0045e2ab62f6 [label="x,y
+" shape=parallelogram]
+	a3a5ce6604e111f0b2df0045e2ab62f6 [label="x = 7
+" shape=rectangle]
+	a3a5ce6704e111f088ee0045e2ab62f6 [label="x > 5" shape=diamond]
+	a3a5ce6804e111f0a6b30045e2ab62f6 [label="y = x × 2
+" shape=rectangle]
+	a3a5f5a204e111f097250045e2ab62f6 [label="y = x - 2
+" shape=rectangle]
+	a3a5f5a304e111f08ba90045e2ab62f6 [label=y
+ shape=parallelogram]
+	a3a5f5a404e111f0ab6f0045e2ab62f6 [label=End
+ shape=oval]
+	a3a5ce6504e111f083e90045e2ab62f6 -> a3a54ede04e111f0833a0045e2ab62f6
+	a3a54ede04e111f0833a0045e2ab62f6 -> a3a5ce6604e111f0b2df0045e2ab62f6
+	a3a5ce6604e111f0b2df0045e2ab62f6 -> a3a5ce6704e111f088ee0045e2ab62f6
+	a3a5ce6704e111f088ee0045e2ab62f6 -> a3a5f5a204e111f097250045e2ab62f6
+	a3a5ce6704e111f088ee0045e2ab62f6 -> a3a5ce6804e111f0a6b30045e2ab62f6
+	a3a5ce6804e111f0a6b30045e2ab62f6 -> a3a5f5a304e111f08ba90045e2ab62f6
+	a3a5f5a204e111f097250045e2ab62f6 -> a3a5f5a304e111f08ba90045e2ab62f6
+	a3a5f5a304e111f08ba90045e2ab62f6 -> a3a5f5a404e111f0ab6f0045e2ab62f6
 }

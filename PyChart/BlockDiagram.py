@@ -113,17 +113,31 @@ class BlockDiagram(ABC):
     def _form_block(self, text='', pos=None, cur_el_id='0', parent_id='0', block_type='none'):
         if pos is None:
             pos = {'x': 0, 'y': 0}
+
         if block_type == 'none':
             block_type = self._get_bd_type_of_line(text.strip().split('\n')[0])
+
         text = text.strip()
+
+        if not text:
+            return None
+
         code = text
         struct_type = self._get_struct_type(code)
         size = BlockDiagram._get_size_of_block(text.split('\n'))
-        if block_type == 'none':
-            return
+
+        shape = "rectangle"  # За замовчуванням
+        if block_type == "Start / end":
+            shape = "oval"
+        elif block_type == "Input / Output":
+            shape = "parallelogram"
+        elif block_type == "Logical Operator":
+            shape = "diamond"
+
         text = self._to_pseudocode(text)
-        if text.strip() == '':
-            return
+
+        if not text.strip():
+            return None
 
         block = {
             "code": code,
@@ -136,6 +150,7 @@ class BlockDiagram(ABC):
             "width": size['width'],
             "height": size['height'],
             "type": block_type,
+            "shape": shape,  # Визначена форма блоку
             "isMenuBlock": False,
             "fontSize": 14,
             "textHeight": 14,

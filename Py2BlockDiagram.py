@@ -1,6 +1,5 @@
 from PyChart import BlockDiagram
 
-
 class Py2BlockDiagram(BlockDiagram):
 
     @staticmethod
@@ -27,21 +26,12 @@ class Py2BlockDiagram(BlockDiagram):
 
     @staticmethod
     def _get_bd_type_of_line(line: str) -> str:
-        line = line.strip()
+        line = line.strip().lower()
 
-        if line[0:2] == 'if':
-            return "Condition"
-        elif line[0:4] == 'else':
-            return 'none'
-        elif line[0:4] == 'elif':
-            return "Condition"
-        elif line[0:3] == 'for':
-            return "Loop for"
-        elif line[0:5] == 'while':
-            return "Loop while"
-        elif 'print' in line:
-            return "Input / Output"
-        elif 'return ' in line:
-            return "Start / end"
-        else:
-            return "Block"
+        if line.startswith("if") or line.startswith("elif") or "?" in line:
+            return "Logical Operator"  # Conditional operators
+        elif any(keyword in line for keyword in ["input", "output", "print"]):
+            return "Input / Output"  # Input/Output operations
+        elif line.startswith("start") or line.startswith("end"):
+            return "Start / end"  # Start/End points
+        return "Block"  # General block
