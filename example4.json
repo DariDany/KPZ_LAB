@@ -2,7 +2,7 @@
     "blocks": [
         {
             "code": "Start",
-            "cur_el_id": "a3a5ce6504e111f083e90045e2ab62f6",
+            "cur_el_id": "ac38a6e2121711f0a8a18cc84b7067bc",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
@@ -22,14 +22,14 @@
             "index": 0
         },
         {
-            "code": "x,y",
-            "cur_el_id": "a3a54ede04e111f0833a0045e2ab62f6",
+            "code": "x,n_sum,last_degree,n,last_num",
+            "cur_el_id": "ac38a56a121711f099e18cc84b7067bc",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
             "y": 0,
-            "text": "x,y\n",
-            "width": 100,
+            "text": "x,n_sum,last_degree,n,last_num\n",
+            "width": 270,
             "height": 40,
             "type": "Input / Output",
             "shape": "parallelogram",
@@ -43,14 +43,14 @@
             "index": 1
         },
         {
-            "code": "x = 7",
-            "cur_el_id": "a3a5ce6604e111f0b2df0045e2ab62f6",
+            "code": "n = 2\nx = 5\nlast_degree = 3\nlast_num = 5\nn_sum = x",
+            "cur_el_id": "ac38a78b121711f0907d8cc84b7067bc",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
             "y": 150,
-            "text": "x = 7\n",
-            "width": 100,
+            "text": "n = 2\nx = 5\nlast_degree = 3\nlast_num = 5\nn_sum = x\n",
+            "width": 135,
             "height": 40,
             "type": "Block",
             "shape": "rectangle",
@@ -64,17 +64,17 @@
             "index": 2
         },
         {
-            "code": "if x > 5:",
-            "cur_el_id": "a3a5ce6704e111f088ee0045e2ab62f6",
+            "code": "for i in range(1, n):",
+            "cur_el_id": "ac38a8d1121711f08b7d8cc84b7067bc",
             "parent_id": "0",
-            "struct_type": "if",
+            "struct_type": "loop",
             "x": 0,
             "y": 300,
-            "text": "x > 5",
-            "width": 100,
+            "text": "i in range(1, n)",
+            "width": 189,
             "height": 40,
-            "type": "Logical Operator",
-            "shape": "diamond",
+            "type": "Block",
+            "shape": "rectangle",
             "isMenuBlock": false,
             "fontSize": 14,
             "textHeight": 14,
@@ -85,14 +85,14 @@
             "index": 3
         },
         {
-            "code": "y = x * 2",
-            "cur_el_id": "a3a5ce6804e111f0a6b30045e2ab62f6",
-            "parent_id": "a3a5ce6704e111f088ee0045e2ab62f6",
+            "code": "n_sum -= (x**last_degree)/last_num\nlast_degree += 2\nlast_num += 2",
+            "cur_el_id": "ac38a99a121711f0904a8cc84b7067bc",
+            "parent_id": "ac38a8d1121711f08b7d8cc84b7067bc",
             "struct_type": "block",
-            "x": 100,
+            "x": 0,
             "y": 450,
-            "text": "y = x \u00d7 2\n",
-            "width": 100,
+            "text": "n_sum -= (x^last_degree)\u00f7last_num\nlast_degree += 2\nlast_num += 2\n",
+            "width": 306,
             "height": 40,
             "type": "Block",
             "shape": "rectangle",
@@ -106,35 +106,14 @@
             "index": 4
         },
         {
-            "code": "y = x - 2",
-            "cur_el_id": "a3a5f5a204e111f097250045e2ab62f6",
-            "parent_id": "a3a5ce6704e111f088ee0045e2ab62f6-else",
-            "struct_type": "block",
-            "x": -100,
-            "y": 450,
-            "text": "y = x - 2\n",
-            "width": 100,
-            "height": 40,
-            "type": "Block",
-            "shape": "rectangle",
-            "isMenuBlock": false,
-            "fontSize": 14,
-            "textHeight": 14,
-            "isBold": false,
-            "isItalic": false,
-            "textAlign": "center",
-            "labelsPosition": 1,
-            "index": 5
-        },
-        {
-            "code": "print(y)",
-            "cur_el_id": "a3a5f5a304e111f08ba90045e2ab62f6",
+            "code": "print(int(n_sum))",
+            "cur_el_id": "ac38aaa0121711f08e738cc84b7067bc",
             "parent_id": "0",
             "struct_type": "output",
             "x": 0,
-            "y": 750,
-            "text": "y\n",
-            "width": 100,
+            "y": 600,
+            "text": "int(n_sum)\n",
+            "width": 153,
             "height": 40,
             "type": "Input / Output",
             "shape": "parallelogram",
@@ -145,15 +124,15 @@
             "isItalic": false,
             "textAlign": "center",
             "labelsPosition": 1,
-            "index": 6
+            "index": 5
         },
         {
             "code": "End",
-            "cur_el_id": "a3a5f5a404e111f0ab6f0045e2ab62f6",
+            "cur_el_id": "ac38ab62121711f0b9708cc84b7067bc",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
-            "y": 850,
+            "y": 700,
             "text": "End\n",
             "width": 100,
             "height": 40,
@@ -166,7 +145,7 @@
             "isItalic": false,
             "textAlign": "center",
             "labelsPosition": 1,
-            "index": 7
+            "index": 6
         }
     ],
     "arrows": [
@@ -181,11 +160,11 @@
                     "y": -100
                 },
                 {
-                    "x": 74,
+                    "x": 164,
                     "y": -100
                 },
                 {
-                    "x": 74,
+                    "x": 164,
                     "y": -40
                 },
                 {
@@ -216,11 +195,11 @@
                     "y": 0
                 },
                 {
-                    "x": 73,
+                    "x": 103,
                     "y": 0
                 },
                 {
-                    "x": 73,
+                    "x": 103,
                     "y": 110
                 },
                 {
@@ -251,11 +230,11 @@
                     "y": 150
                 },
                 {
-                    "x": 72,
+                    "x": 132,
                     "y": 150
                 },
                 {
-                    "x": 72,
+                    "x": 132,
                     "y": 260
                 },
                 {
@@ -277,6 +256,41 @@
         },
         {
             "startIndex": 3,
+            "endIndex": 4,
+            "startConnectorIndex": 2,
+            "endConnectorIndex": 0,
+            "nodes": [
+                {
+                    "x": 0,
+                    "y": 300
+                },
+                {
+                    "x": 191,
+                    "y": 300
+                },
+                {
+                    "x": 191,
+                    "y": 410
+                },
+                {
+                    "x": 450,
+                    "y": 410
+                },
+                {
+                    "x": 450,
+                    "y": 490
+                }
+            ],
+            "counts": [
+                1,
+                1,
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "startIndex": 3,
             "endIndex": 5,
             "startConnectorIndex": 3,
             "endConnectorIndex": 0,
@@ -286,51 +300,61 @@
                     "y": 300
                 },
                 {
-                    "x": 450,
-                    "y": 450
+                    "x": -170,
+                    "y": 300
+                },
+                {
+                    "x": -170,
+                    "y": 560
+                },
+                {
+                    "x": 600,
+                    "y": 560
+                },
+                {
+                    "x": 600,
+                    "y": 640
                 }
             ],
             "counts": [
                 1,
-                1
-            ]
-        },
-        {
-            "startIndex": 3,
-            "endIndex": 4,
-            "startConnectorIndex": 1,
-            "endConnectorIndex": 0,
-            "nodes": [
-                {
-                    "x": 0,
-                    "y": 300
-                },
-                {
-                    "x": 450,
-                    "y": 450
-                }
-            ],
-            "counts": [
+                1,
+                1,
                 1,
                 1
             ]
         },
         {
             "startIndex": 4,
-            "endIndex": 6,
+            "endIndex": 3,
             "startConnectorIndex": 2,
-            "endConnectorIndex": 0,
+            "endConnectorIndex": 1,
             "nodes": [
                 {
-                    "x": 100,
+                    "x": 0,
                     "y": 450
                 },
                 {
-                    "x": 750,
-                    "y": 750
+                    "x": 0,
+                    "y": 500
+                },
+                {
+                    "x": 209,
+                    "y": 500
+                },
+                {
+                    "x": 209,
+                    "y": 300
+                },
+                {
+                    "x": 300,
+                    "y": 300
                 }
             ],
             "counts": [
+                1,
+                1,
+                1,
                 1,
                 1
             ]
@@ -342,44 +366,24 @@
             "endConnectorIndex": 0,
             "nodes": [
                 {
-                    "x": -100,
-                    "y": 450
-                },
-                {
-                    "x": 750,
-                    "y": 750
-                }
-            ],
-            "counts": [
-                1,
-                1
-            ]
-        },
-        {
-            "startIndex": 6,
-            "endIndex": 7,
-            "startConnectorIndex": 2,
-            "endConnectorIndex": 0,
-            "nodes": [
-                {
                     "x": 0,
-                    "y": 750
+                    "y": 600
                 },
                 {
-                    "x": 67,
-                    "y": 750
+                    "x": 68,
+                    "y": 600
                 },
                 {
-                    "x": 67,
-                    "y": 810
+                    "x": 68,
+                    "y": 660
                 },
                 {
-                    "x": 850,
-                    "y": 810
+                    "x": 700,
+                    "y": 660
                 },
                 {
-                    "x": 850,
-                    "y": 890
+                    "x": 700,
+                    "y": 740
                 }
             ],
             "counts": [
