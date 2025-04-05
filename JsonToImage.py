@@ -22,9 +22,12 @@ def json_to_flowchart(json_data, output_file="flowchart"):
         dot.node(block["cur_el_id"], block["text"], shape=block["shape"])
 
     for arrow in json_data["arrows"]:
+        # Додаємо мітку, якщо вона є
+        label = arrow.get("label", "")
         dot.edge(
             json_data["blocks"][arrow["startIndex"]]["cur_el_id"],
-            json_data["blocks"][arrow["endIndex"]]["cur_el_id"]
+            json_data["blocks"][arrow["endIndex"]]["cur_el_id"],
+            label=label  # Додано мітку
         )
 
     if os.path.exists(output_file + ".png"):

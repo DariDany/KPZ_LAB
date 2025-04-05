@@ -2,7 +2,7 @@
     "blocks": [
         {
             "code": "Start",
-            "cur_el_id": "bc7d88bd121f11f0ad4f8cc84b7067bc",
+            "cur_el_id": "47d9d01d125611f09bed0045e2ab62f6",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
@@ -23,7 +23,7 @@
         },
         {
             "code": "n = 2\nx = 5\nlast_degree = 3\nlast_num = 5\nn_sum = x",
-            "cur_el_id": "bc7d91e8121f11f09d058cc84b7067bc",
+            "cur_el_id": "47d9d01e125611f0bba70045e2ab62f6",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
@@ -44,7 +44,7 @@
         },
         {
             "code": "for i in range(1, n):",
-            "cur_el_id": "bc7d9c56121f11f0bc9b8cc84b7067bc",
+            "cur_el_id": "47d9d01f125611f0a9d00045e2ab62f6",
             "parent_id": "0",
             "struct_type": "loop",
             "x": 0,
@@ -65,8 +65,8 @@
         },
         {
             "code": "n_sum -= (x**last_degree)/last_num\nlast_degree += 2\nlast_num += 2",
-            "cur_el_id": "bc7da096121f11f0a6578cc84b7067bc",
-            "parent_id": "bc7d9c56121f11f0bc9b8cc84b7067bc",
+            "cur_el_id": "47d9d020125611f08f140045e2ab62f6",
+            "parent_id": "47d9d01f125611f0a9d00045e2ab62f6",
             "struct_type": "block",
             "x": 0,
             "y": 450,
@@ -86,7 +86,7 @@
         },
         {
             "code": "print(int(n_sum))",
-            "cur_el_id": "bc7da871121f11f0a3d28cc84b7067bc",
+            "cur_el_id": "47d9d021125611f0bdd60045e2ab62f6",
             "parent_id": "0",
             "struct_type": "output",
             "x": 0,
@@ -107,7 +107,7 @@
         },
         {
             "code": "End",
-            "cur_el_id": "bc7daebd121f11f0ab028cc84b7067bc",
+            "cur_el_id": "47d9d022125611f0a8930045e2ab62f6",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
@@ -147,11 +147,11 @@
                     "y": 110
                 },
                 {
-                    "x": 150,
+                    "x": 0,
                     "y": 110
                 },
                 {
-                    "x": 150,
+                    "x": 0,
                     "y": 190
                 }
             ],
@@ -161,7 +161,8 @@
                 1,
                 1,
                 1
-            ]
+            ],
+            "label": ""
         },
         {
             "startIndex": 1,
@@ -182,11 +183,11 @@
                     "y": 260
                 },
                 {
-                    "x": 300,
+                    "x": 0,
                     "y": 260
                 },
                 {
-                    "x": 300,
+                    "x": 0,
                     "y": 340
                 }
             ],
@@ -196,7 +197,8 @@
                 1,
                 1,
                 1
-            ]
+            ],
+            "label": ""
         },
         {
             "startIndex": 2,
@@ -217,11 +219,11 @@
                     "y": 410
                 },
                 {
-                    "x": 450,
+                    "x": 0,
                     "y": 410
                 },
                 {
-                    "x": 450,
+                    "x": 0,
                     "y": 490
                 }
             ],
@@ -231,7 +233,8 @@
                 1,
                 1,
                 1
-            ]
+            ],
+            "label": ""
         },
         {
             "startIndex": 2,
@@ -252,11 +255,11 @@
                     "y": 560
                 },
                 {
-                    "x": 600,
+                    "x": 0,
                     "y": 560
                 },
                 {
-                    "x": 600,
+                    "x": 0,
                     "y": 640
                 }
             ],
@@ -266,7 +269,8 @@
                 1,
                 1,
                 1
-            ]
+            ],
+            "label": ""
         },
         {
             "startIndex": 3,
@@ -291,7 +295,7 @@
                     "y": 300
                 },
                 {
-                    "x": 300,
+                    "x": 0,
                     "y": 300
                 }
             ],
@@ -301,7 +305,8 @@
                 1,
                 1,
                 1
-            ]
+            ],
+            "label": ""
         },
         {
             "startIndex": 4,
@@ -322,11 +327,11 @@
                     "y": 660
                 },
                 {
-                    "x": 700,
+                    "x": 0,
                     "y": 660
                 },
                 {
-                    "x": 700,
+                    "x": 0,
                     "y": 740
                 }
             ],
@@ -336,7 +341,8 @@
                 1,
                 1,
                 1
-            ]
+            ],
+            "label": ""
         }
     ],
     "x0": 0,
