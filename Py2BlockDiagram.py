@@ -1,4 +1,6 @@
+import re
 from PyChart import BlockDiagram
+
 
 class Py2BlockDiagram(BlockDiagram):
 
@@ -34,4 +36,7 @@ class Py2BlockDiagram(BlockDiagram):
             return "Input / Output"  # Input/Output operations
         elif line.startswith("start") or line.startswith("end"):
             return "Start / end"  # Start/End points
+        # Присваивание типа x = 5, y = x * 2
+        elif re.match(r"^[a-z_]\w*\s*=\s*[^=]", line):
+            return "Block"
         return "Block"  # General block

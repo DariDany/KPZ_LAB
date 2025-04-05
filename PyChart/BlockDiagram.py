@@ -48,12 +48,12 @@ class BlockDiagram(ABC):
         if name == 'main':
             name = ''
 
-        if self._variables:
-            self._diagram['blocks'].insert(0, self._form_block(','.join(self._variables),
-                                                               {'y': self._last_y,
-                                                                'x': self._last_x},
-                                                               uuid.uuid1().hex, '0',
-                                                               'Input / Output'))
+        # if self._variables:
+        #     self._diagram['blocks'].insert(0, self._form_block(','.join(self._variables),
+        #                                                        {'y': self._last_y,
+        #                                                         'x': self._last_x},
+        #                                                        uuid.uuid1().hex, '0',
+        #                                                        'Input / Output'))
         self._diagram['blocks'].insert(0,
                                        self._form_block(f'Start {name}',
                                                         {'y': self._last_y - 100,
