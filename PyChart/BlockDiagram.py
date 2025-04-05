@@ -325,7 +325,7 @@ class BlockDiagram(ABC):
     def _to_pseudocode(self, lines: str) -> str:
         return self._pseudocode.to_pseudocode(lines)
 
-    def _draw_arrow(self, start_end_pos: dict, start_end_indexes: dict, direction: dict) -> None:
+    def _draw_arrow(self, start_end_pos: dict, start_end_indexes: dict, direction: dict, label: str = "") -> None:
         dirs = self._direction
         delta = self._last_arrow_pos_delta - 1
         arrow = {
@@ -334,7 +334,8 @@ class BlockDiagram(ABC):
             "startConnectorIndex": direction['start'],
             "endConnectorIndex": direction['end'],
             "nodes": [],
-            "counts": []
+            "counts": [],
+            "label": label  # Додано мітку
         }
 
         x1 = start_end_pos['start']['x']
@@ -391,10 +392,13 @@ class BlockDiagram(ABC):
         self._last_arrow_pos_delta -= 1
         self._diagram['arrows'].append(arrow)
 
-    def _connect_blocks(self, block1: dict, block2: dict, direction: dict) -> None:
-        self._draw_arrow({'start': {'y': block1['y'], 'x': block1['x']}, 'end': {'y': block2['y'], 'x': block2['y']}},
-                         {'start': block1['index'], 'end': block2['index']}, direction)
-
+    def _connect_blocks(self, block1: dict, block2: dict, direction: dict, label: str = "") -> None:
+        self._draw_arrow(
+            {'start': {'y': block1['y'], 'x': block1['x']}, 'end': {'y': block2['y'], 'x': block2['x']}},
+            {'start': block1['index'], 'end': block2['index']},
+            direction,
+            label  # Передаємо мітку
+        )
     def _align_if_else_bodies(self) -> None:
         if_structs = self._find_blocks_by_property('struct_type', 'if')
 
@@ -472,17 +476,15 @@ class BlockDiagram(ABC):
                                 item, b_c, {'start': dirs['DOWN'], 'end': dirs['RIGHT']})
 
                 if struct_type == 'if':
-                    if_body = self._find_blocks_by_property(
-                        'parent_id', cur_id)
-                    else_body = self._find_blocks_by_property(
-                        'parent_id', cur_id + '-else')
+                    if_body = self._find_blocks_by_property('parent_id', cur_id)
+                    else_body = self._find_blocks_by_property('parent_id', cur_id + '-else')
 
+                    # Додаємо мітки "так" і "ні"
                     if len(else_body) > 0:
-                        self._connect_blocks(b_c, else_body[0], {
-                                             'start': dirs['LEFT'], 'end': dirs['UP']})
-                    self._connect_blocks(
-                        b_c, if_body[0], {'start': dirs['RIGHT'], 'end': dirs['UP']})
-
+                        self._connect_blocks(b_c, else_body[0],
+                                             {'start': dirs['LEFT'], 'end': dirs['UP']}, label="ні")  # Стрілка "ні"
+                    self._connect_blocks(b_c, if_body[0],
+                                         {'start': dirs['RIGHT'], 'end': dirs['UP']}, label="так")
                     self._connect_all_blocks_by_arrows(cur_id)
                     self._connect_all_blocks_by_arrows(cur_id + '-else')
 
