@@ -43,4 +43,5 @@ class Py2PseudoCode(PseudoCode):
                     else:
                         pseudocode += f'{line}\n'
 
+        print(pseudocode)
         return pseudocode
