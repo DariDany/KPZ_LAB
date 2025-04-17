@@ -1,14 +1,14 @@
 {
     "blocks": [
         {
-            "code": "Start square",
-            "cur_el_id": "d1f7e6b11b9d11f096c90045e2ab62f6",
+            "code": "Start",
+            "cur_el_id": "800d6a3f1b9e11f0b1770045e2ab62f6",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
             "y": -100,
-            "text": "Start square\n",
-            "width": 108,
+            "text": "Start\n",
+            "width": 100,
             "height": 40,
             "type": "Start / end",
             "shape": "oval",
@@ -22,14 +22,14 @@
             "index": 0
         },
         {
-            "code": "return x * x",
-            "cur_el_id": "d1f7e6b21b9d11f0b88a0045e2ab62f6",
+            "code": "x = 7",
+            "cur_el_id": "800d6a401b9e11f08f540045e2ab62f6",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
             "y": 150,
-            "text": "return x * x\n",
-            "width": 108,
+            "text": "x = 7\n",
+            "width": 100,
             "height": 40,
             "type": "Block",
             "shape": "rectangle",
@@ -43,17 +43,17 @@
             "index": 1
         },
         {
-            "code": "Start",
-            "cur_el_id": "d1f7e6b31b9d11f09af70045e2ab62f6",
+            "code": "if x > 5:",
+            "cur_el_id": "800d6a411b9e11f088920045e2ab62f6",
             "parent_id": "0",
-            "struct_type": "block",
+            "struct_type": "if",
             "x": 0,
-            "y": 200,
-            "text": "Start\n",
+            "y": 300,
+            "text": "x > 5\n",
             "width": 100,
             "height": 40,
-            "type": "Start / end",
-            "shape": "oval",
+            "type": "Logical Operator",
+            "shape": "diamond",
             "isMenuBlock": false,
             "fontSize": 14,
             "textHeight": 14,
@@ -64,14 +64,14 @@
             "index": 2
         },
         {
-            "code": "result = square(4)",
-            "cur_el_id": "d1f7e6b41b9d11f0aaec0045e2ab62f6",
-            "parent_id": "0",
+            "code": "y = x * 2",
+            "cur_el_id": "800d6a421b9e11f0a77a0045e2ab62f6",
+            "parent_id": "800d6a411b9e11f088920045e2ab62f6",
             "struct_type": "block",
-            "x": 0,
+            "x": 100,
             "y": 450,
-            "text": "result = square(4)\n",
-            "width": 162,
+            "text": "y = x * 2\n",
+            "width": 100,
             "height": 40,
             "type": "Block",
             "shape": "rectangle",
@@ -85,17 +85,17 @@
             "index": 3
         },
         {
-            "code": "print(result)",
-            "cur_el_id": "d1f7e6b51b9d11f089570045e2ab62f6",
-            "parent_id": "0",
-            "struct_type": "output",
-            "x": 0,
-            "y": 600,
-            "text": "result\n",
-            "width": 117,
+            "code": "y = x - 2",
+            "cur_el_id": "800d6a441b9e11f0b6260045e2ab62f6",
+            "parent_id": "800d6a411b9e11f088920045e2ab62f6-else",
+            "struct_type": "block",
+            "x": -100,
+            "y": 450,
+            "text": "y = x - 2\n",
+            "width": 100,
             "height": 40,
-            "type": "Input / Output",
-            "shape": "parallelogram",
+            "type": "Block",
+            "shape": "rectangle",
             "isMenuBlock": false,
             "fontSize": 14,
             "textHeight": 14,
@@ -106,12 +106,33 @@
             "index": 4
         },
         {
+            "code": "print(y)",
+            "cur_el_id": "800d6a451b9e11f08a840045e2ab62f6",
+            "parent_id": "0",
+            "struct_type": "output",
+            "x": 0,
+            "y": 750,
+            "text": "y\n",
+            "width": 100,
+            "height": 40,
+            "type": "Input / Output",
+            "shape": "parallelogram",
+            "isMenuBlock": false,
+            "fontSize": 14,
+            "textHeight": 14,
+            "isBold": false,
+            "isItalic": false,
+            "textAlign": "center",
+            "labelsPosition": 1,
+            "index": 5
+        },
+        {
             "code": "End",
-            "cur_el_id": "d1f7e6b61b9d11f0ab1a0045e2ab62f6",
+            "cur_el_id": "800d6a461b9e11f0b05f0045e2ab62f6",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
-            "y": 700,
+            "y": 850,
             "text": "End\n",
             "width": 100,
             "height": 40,
@@ -124,7 +145,7 @@
             "isItalic": false,
             "textAlign": "center",
             "labelsPosition": 1,
-            "index": 5
+            "index": 6
         }
     ],
     "arrows": [
@@ -165,30 +186,30 @@
             "label": ""
         },
         {
-            "startIndex": 2,
-            "endIndex": 3,
+            "startIndex": 1,
+            "endIndex": 2,
             "startConnectorIndex": 2,
             "endConnectorIndex": 0,
             "nodes": [
                 {
                     "x": 0,
-                    "y": 200
+                    "y": 150
                 },
                 {
-                    "x": 104,
-                    "y": 200
+                    "x": 73,
+                    "y": 150
                 },
                 {
-                    "x": 104,
-                    "y": 410
-                },
-                {
-                    "x": 0,
-                    "y": 410
+                    "x": 73,
+                    "y": 260
                 },
                 {
                     "x": 0,
-                    "y": 490
+                    "y": 260
+                },
+                {
+                    "x": 0,
+                    "y": 340
                 }
             ],
             "counts": [
@@ -201,36 +222,63 @@
             "label": ""
         },
         {
-            "startIndex": 3,
-            "endIndex": 4,
-            "startConnectorIndex": 2,
+            "startIndex": 2,
+            "endIndex": 3,
+            "startConnectorIndex": 1,
             "endConnectorIndex": 0,
             "nodes": [
                 {
                     "x": 0,
+                    "y": 300
+                },
+                {
+                    "x": 100,
                     "y": 450
-                },
-                {
-                    "x": 73,
-                    "y": 450
-                },
-                {
-                    "x": 73,
-                    "y": 560
-                },
-                {
-                    "x": 0,
-                    "y": 560
-                },
-                {
-                    "x": 0,
-                    "y": 640
                 }
             ],
             "counts": [
                 1,
+                1
+            ],
+            "label": "\u0442\u0430\u043a"
+        },
+        {
+            "startIndex": 2,
+            "endIndex": 4,
+            "startConnectorIndex": 3,
+            "endConnectorIndex": 0,
+            "nodes": [
+                {
+                    "x": 0,
+                    "y": 300
+                },
+                {
+                    "x": -100,
+                    "y": 450
+                }
+            ],
+            "counts": [
                 1,
-                1,
+                1
+            ],
+            "label": "\u043d\u0456"
+        },
+        {
+            "startIndex": 3,
+            "endIndex": 5,
+            "startConnectorIndex": 2,
+            "endConnectorIndex": 0,
+            "nodes": [
+                {
+                    "x": 100,
+                    "y": 450
+                },
+                {
+                    "x": 0,
+                    "y": 750
+                }
+            ],
+            "counts": [
                 1,
                 1
             ],
@@ -243,30 +291,15 @@
             "endConnectorIndex": 0,
             "nodes": [
                 {
-                    "x": 0,
-                    "y": 600
-                },
-                {
-                    "x": 72,
-                    "y": 600
-                },
-                {
-                    "x": 72,
-                    "y": 660
+                    "x": -100,
+                    "y": 450
                 },
                 {
                     "x": 0,
-                    "y": 660
-                },
-                {
-                    "x": 0,
-                    "y": 740
+                    "y": 750
                 }
             ],
             "counts": [
-                1,
-                1,
-                1,
                 1,
                 1
             ],
