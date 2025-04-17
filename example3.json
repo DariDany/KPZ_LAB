@@ -1,14 +1,14 @@
 {
     "blocks": [
         {
-            "code": "Start",
-            "cur_el_id": "4698ff601b7b11f0a30b0045e2ab62f6",
+            "code": "Start square",
+            "cur_el_id": "d1f7e6b11b9d11f096c90045e2ab62f6",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
             "y": -100,
-            "text": "Start\n",
-            "width": 100,
+            "text": "Start square\n",
+            "width": 108,
             "height": 40,
             "type": "Start / end",
             "shape": "oval",
@@ -22,14 +22,14 @@
             "index": 0
         },
         {
-            "code": "sum = 0",
-            "cur_el_id": "4698ff611b7b11f0b7950045e2ab62f6",
+            "code": "return x * x",
+            "cur_el_id": "d1f7e6b21b9d11f0b88a0045e2ab62f6",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
             "y": 150,
-            "text": "sum = 0\n",
-            "width": 100,
+            "text": "return x * x\n",
+            "width": 108,
             "height": 40,
             "type": "Block",
             "shape": "rectangle",
@@ -43,17 +43,17 @@
             "index": 1
         },
         {
-            "code": "for i in range(1, 6):",
-            "cur_el_id": "4698ff621b7b11f0a2de0045e2ab62f6",
+            "code": "Start",
+            "cur_el_id": "d1f7e6b31b9d11f09af70045e2ab62f6",
             "parent_id": "0",
-            "struct_type": "loop",
+            "struct_type": "block",
             "x": 0,
-            "y": 300,
-            "text": "i in range(1, 6)\n",
-            "width": 189,
+            "y": 200,
+            "text": "Start\n",
+            "width": 100,
             "height": 40,
-            "type": "Logical Operator",
-            "shape": "diamond",
+            "type": "Start / end",
+            "shape": "oval",
             "isMenuBlock": false,
             "fontSize": 14,
             "textHeight": 14,
@@ -64,14 +64,14 @@
             "index": 2
         },
         {
-            "code": "sum += i",
-            "cur_el_id": "4698ff631b7b11f0bacc0045e2ab62f6",
-            "parent_id": "4698ff621b7b11f0a2de0045e2ab62f6",
+            "code": "result = square(4)",
+            "cur_el_id": "d1f7e6b41b9d11f0aaec0045e2ab62f6",
+            "parent_id": "0",
             "struct_type": "block",
             "x": 0,
             "y": 450,
-            "text": "sum = sum + i\n",
-            "width": 100,
+            "text": "result = square(4)\n",
+            "width": 162,
             "height": 40,
             "type": "Block",
             "shape": "rectangle",
@@ -85,14 +85,14 @@
             "index": 3
         },
         {
-            "code": "print(sum)",
-            "cur_el_id": "4698ff641b7b11f0b6d90045e2ab62f6",
+            "code": "print(result)",
+            "cur_el_id": "d1f7e6b51b9d11f089570045e2ab62f6",
             "parent_id": "0",
             "struct_type": "output",
             "x": 0,
             "y": 600,
-            "text": "sum\n",
-            "width": 100,
+            "text": "result\n",
+            "width": 117,
             "height": 40,
             "type": "Input / Output",
             "shape": "parallelogram",
@@ -107,7 +107,7 @@
         },
         {
             "code": "End",
-            "cur_el_id": "4698ff651b7b11f08b2a0045e2ab62f6",
+            "cur_el_id": "d1f7e6b61b9d11f0ab1a0045e2ab62f6",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
@@ -165,42 +165,6 @@
             "label": ""
         },
         {
-            "startIndex": 1,
-            "endIndex": 2,
-            "startConnectorIndex": 2,
-            "endConnectorIndex": 0,
-            "nodes": [
-                {
-                    "x": 0,
-                    "y": 150
-                },
-                {
-                    "x": 133,
-                    "y": 150
-                },
-                {
-                    "x": 133,
-                    "y": 260
-                },
-                {
-                    "x": 0,
-                    "y": 260
-                },
-                {
-                    "x": 0,
-                    "y": 340
-                }
-            ],
-            "counts": [
-                1,
-                1,
-                1,
-                1,
-                1
-            ],
-            "label": ""
-        },
-        {
             "startIndex": 2,
             "endIndex": 3,
             "startConnectorIndex": 2,
@@ -208,14 +172,14 @@
             "nodes": [
                 {
                     "x": 0,
-                    "y": 300
+                    "y": 200
                 },
                 {
-                    "x": 72,
-                    "y": 300
+                    "x": 104,
+                    "y": 200
                 },
                 {
-                    "x": 72,
+                    "x": 104,
                     "y": 410
                 },
                 {
@@ -234,11 +198,11 @@
                 1,
                 1
             ],
-            "label": "\u0442\u0430\u043a"
+            "label": ""
         },
         {
             "startIndex": 3,
-            "endIndex": 2,
+            "endIndex": 4,
             "startConnectorIndex": 2,
             "endConnectorIndex": 0,
             "nodes": [
@@ -247,47 +211,11 @@
                     "y": 450
                 },
                 {
-                    "x": 131,
+                    "x": 73,
                     "y": 450
                 },
                 {
-                    "x": 131,
-                    "y": 260
-                },
-                {
-                    "x": 0,
-                    "y": 260
-                },
-                {
-                    "x": 0,
-                    "y": 340
-                }
-            ],
-            "counts": [
-                1,
-                1,
-                1,
-                1,
-                1
-            ],
-            "label": ""
-        },
-        {
-            "startIndex": 2,
-            "endIndex": 4,
-            "startConnectorIndex": 1,
-            "endConnectorIndex": 0,
-            "nodes": [
-                {
-                    "x": 0,
-                    "y": 300
-                },
-                {
-                    "x": 70,
-                    "y": 300
-                },
-                {
-                    "x": 70,
+                    "x": 73,
                     "y": 560
                 },
                 {
@@ -306,7 +234,7 @@
                 1,
                 1
             ],
-            "label": "\u043d\u0456"
+            "label": ""
         },
         {
             "startIndex": 4,
@@ -319,11 +247,11 @@
                     "y": 600
                 },
                 {
-                    "x": 69,
+                    "x": 72,
                     "y": 600
                 },
                 {
-                    "x": 69,
+                    "x": 72,
                     "y": 660
                 },
                 {
