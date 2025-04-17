@@ -2,7 +2,7 @@
     "blocks": [
         {
             "code": "Start",
-            "cur_el_id": "47d9d01d125611f09bed0045e2ab62f6",
+            "cur_el_id": "a10866c01b7611f0a7380045e2ab62f6",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
@@ -22,14 +22,14 @@
             "index": 0
         },
         {
-            "code": "n = 2\nx = 5\nlast_degree = 3\nlast_num = 5\nn_sum = x",
-            "cur_el_id": "47d9d01e125611f0bba70045e2ab62f6",
+            "code": "sum = 0",
+            "cur_el_id": "a10866c11b7611f097100045e2ab62f6",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
             "y": 150,
-            "text": "n = 2\nx = 5\nlast_degree = 3\nlast_num = 5\nn_sum = x\n",
-            "width": 135,
+            "text": "sum = 0\n",
+            "width": 100,
             "height": 40,
             "type": "Block",
             "shape": "rectangle",
@@ -43,17 +43,17 @@
             "index": 1
         },
         {
-            "code": "for i in range(1, n):",
-            "cur_el_id": "47d9d01f125611f0a9d00045e2ab62f6",
+            "code": "for i in range(1, 6):",
+            "cur_el_id": "a10866c21b7611f094530045e2ab62f6",
             "parent_id": "0",
             "struct_type": "loop",
             "x": 0,
             "y": 300,
-            "text": "i in range(1, n)",
+            "text": "i in range(1, 6)\n",
             "width": 189,
             "height": 40,
-            "type": "Block",
-            "shape": "rectangle",
+            "type": "Logical Operator",
+            "shape": "diamond",
             "isMenuBlock": false,
             "fontSize": 14,
             "textHeight": 14,
@@ -64,14 +64,14 @@
             "index": 2
         },
         {
-            "code": "n_sum -= (x**last_degree)/last_num\nlast_degree += 2\nlast_num += 2",
-            "cur_el_id": "47d9d020125611f08f140045e2ab62f6",
-            "parent_id": "47d9d01f125611f0a9d00045e2ab62f6",
+            "code": "sum += i",
+            "cur_el_id": "a10866c31b7611f0abe20045e2ab62f6",
+            "parent_id": "a10866c21b7611f094530045e2ab62f6",
             "struct_type": "block",
             "x": 0,
             "y": 450,
-            "text": "n_sum -= (x^last_degree)\u00f7last_num\nlast_degree += 2\nlast_num += 2\n",
-            "width": 306,
+            "text": "sum = sum + i\n",
+            "width": 100,
             "height": 40,
             "type": "Block",
             "shape": "rectangle",
@@ -85,14 +85,14 @@
             "index": 3
         },
         {
-            "code": "print(int(n_sum))",
-            "cur_el_id": "47d9d021125611f0bdd60045e2ab62f6",
+            "code": "print(sum)",
+            "cur_el_id": "a10866c41b7611f0bcf00045e2ab62f6",
             "parent_id": "0",
             "struct_type": "output",
             "x": 0,
             "y": 600,
-            "text": "int(n_sum)\n",
-            "width": 153,
+            "text": "sum\n",
+            "width": 100,
             "height": 40,
             "type": "Input / Output",
             "shape": "parallelogram",
@@ -107,7 +107,7 @@
         },
         {
             "code": "End",
-            "cur_el_id": "47d9d022125611f0a8930045e2ab62f6",
+            "cur_el_id": "a10866c51b7611f094420045e2ab62f6",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
@@ -139,11 +139,11 @@
                     "y": -100
                 },
                 {
-                    "x": 104,
+                    "x": 74,
                     "y": -100
                 },
                 {
-                    "x": 104,
+                    "x": 74,
                     "y": 110
                 },
                 {
@@ -211,11 +211,11 @@
                     "y": 300
                 },
                 {
-                    "x": 192,
+                    "x": 72,
                     "y": 300
                 },
                 {
-                    "x": 192,
+                    "x": 72,
                     "y": 410
                 },
                 {
@@ -234,12 +234,48 @@
                 1,
                 1
             ],
-            "label": ""
+            "label": "\u0442\u0430\u043a"
+        },
+        {
+            "startIndex": 3,
+            "endIndex": 2,
+            "startConnectorIndex": 2,
+            "endConnectorIndex": 0,
+            "nodes": [
+                {
+                    "x": 0,
+                    "y": 450
+                },
+                {
+                    "x": 131,
+                    "y": 450
+                },
+                {
+                    "x": 131,
+                    "y": 260
+                },
+                {
+                    "x": 0,
+                    "y": 260
+                },
+                {
+                    "x": 0,
+                    "y": 340
+                }
+            ],
+            "counts": [
+                1,
+                1,
+                1,
+                1,
+                1
+            ],
+            "label": "loop"
         },
         {
             "startIndex": 2,
             "endIndex": 4,
-            "startConnectorIndex": 3,
+            "startConnectorIndex": 1,
             "endConnectorIndex": 0,
             "nodes": [
                 {
@@ -247,11 +283,11 @@
                     "y": 300
                 },
                 {
-                    "x": -169,
+                    "x": 70,
                     "y": 300
                 },
                 {
-                    "x": -169,
+                    "x": 70,
                     "y": 560
                 },
                 {
@@ -270,7 +306,7 @@
                 1,
                 1
             ],
-            "label": ""
+            "label": "\u043d\u0456"
         },
         {
             "startIndex": 3,
@@ -287,11 +323,11 @@
                     "y": 500
                 },
                 {
-                    "x": 210,
+                    "x": 109,
                     "y": 500
                 },
                 {
-                    "x": 210,
+                    "x": 109,
                     "y": 300
                 },
                 {
@@ -319,11 +355,11 @@
                     "y": 600
                 },
                 {
-                    "x": 69,
+                    "x": 68,
                     "y": 600
                 },
                 {
-                    "x": 69,
+                    "x": 68,
                     "y": 660
                 },
                 {

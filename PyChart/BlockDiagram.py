@@ -448,30 +448,36 @@ class BlockDiagram(ABC):
                 b_n = None
             struct_type = b_c['struct_type']
             cur_id = b_c['cur_el_id']
+
             if (struct_type == 'block' or struct_type == 'output') and b_n is not None:
                 self._connect_blocks(
                     b_c, b_n, {'start': dirs['DOWN'], 'end': dirs['UP']})
             else:
                 if struct_type == 'loop':
                     body = self._find_blocks_by_property('parent_id', cur_id)
-                    is_last_close_child_loop = body[-1]['struct_type'] == 'loop'
+                    if body:
+                        # Connect condition to body (YES path)
+                        self._connect_blocks(b_c, body[0],
+                                             {'start': dirs['DOWN'], 'end': dirs['UP']},
+                                             label="так")
 
-                    self._connect_blocks(
-                        b_c, body[0], {'start': dirs['DOWN'], 'end': dirs['UP']})
-                    self._connect_all_blocks_by_arrows(cur_id)
-                    if b_n is not None:
-                        self._connect_blocks(
-                            b_c, b_n, {'start': dirs['LEFT'], 'end': dirs['UP']})
+                        # Connect body back to condition
+                        self._connect_blocks(body[-1], b_c,
+                                             {'start': dirs['DOWN'], 'end': dirs['UP']},
+                                             label="loop")
 
-                    if is_last_close_child_loop:
-                        self._connect_blocks(
-                            body[-1], b_c, {'start': dirs['LEFT'], 'end': dirs['RIGHT']})
+                        # Connect condition to next block (NO/exit path)
+                        if b_n is not None:
+                            self._connect_blocks(b_c, b_n,
+                                                 {'start': dirs['RIGHT'], 'end': dirs['UP']},
+                                                 label="ні")
 
+                    # Handle any nested structures in the loop
                     for item in self._find_farthest_children([b_c]):
                         if item['struct_type'] == 'if':
                             self._connect_blocks(
                                 item, b_c, {'start': dirs['LEFT'], 'end': dirs['RIGHT']})
-                        elif not is_last_close_child_loop:
+                        else:
                             self._connect_blocks(
                                 item, b_c, {'start': dirs['DOWN'], 'end': dirs['RIGHT']})
 
@@ -479,10 +485,10 @@ class BlockDiagram(ABC):
                     if_body = self._find_blocks_by_property('parent_id', cur_id)
                     else_body = self._find_blocks_by_property('parent_id', cur_id + '-else')
 
-                    # Додаємо мітки "так" і "ні"
+                    # Add "yes" and "no" labels
                     if len(else_body) > 0:
                         self._connect_blocks(b_c, else_body[0],
-                                             {'start': dirs['LEFT'], 'end': dirs['UP']}, label="ні")  # Стрілка "ні"
+                                             {'start': dirs['LEFT'], 'end': dirs['UP']}, label="ні")
                     self._connect_blocks(b_c, if_body[0],
                                          {'start': dirs['RIGHT'], 'end': dirs['UP']}, label="так")
                     self._connect_all_blocks_by_arrows(cur_id)
@@ -495,7 +501,6 @@ class BlockDiagram(ABC):
                         elif b_n is not None:
                             self._connect_blocks(
                                 item, b_n, {'start': dirs['DOWN'], 'end': dirs['UP']})
-
     def _find_farthest_children(self, blocks: list) -> list:
         children = []
         if len(blocks) == 0:

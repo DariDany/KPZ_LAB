@@ -10,38 +10,53 @@ class Py2PseudoCode(PseudoCode):
         lines = lines.split('\n')  # type: ignore
 
         for line in lines:
-            # clear type-changing operators, input, print
-            # IT MUST BE BEFORE THE '*' statement!!!
+            line = line.strip()
+
+            if not line:
+                continue
+
+            # Заміна ** на ^
             line = line.replace('**', '^')
-            line = line.replace('*', '×')
-            line = line.replace('/', '÷')
+
+            # Приведення -= і += до повноцінного вигляду
+            line = re.sub(r'(\w+)\s*\-=\s*(.+)', r'\1 = \1 - \2', line)
+            line = re.sub(r'(\w+)\s*\+=\s*(.+)', r'\1 = \1 + \2', line)
+
+            # Видалити імпорти
             if 'import ' in line:
-                line = ''
-            line = re.sub(r'print ?\((.*)\)?\)', r'\g<1>', line)
-            line = re.sub(r'(\=| |\()(int|float|str|bool|tuple|list|dict|set) ?\((.*)\)',
-                          r'\g<3>', line)  # IT MUST BE LAST!!!!
+                continue
 
-            # control structs to c-style
-            if line[0:2] == 'if':
-                pseudocode += re.sub(r'if ', '', line)[0:-1]
-            elif line[0:4] == 'else':
+            # print(int(...)) або print(...) → просто вираз
+            line = re.sub(r'print\s*\((.*)\)', r'\1', line)
+
+            # input, int(...), float(...) тощо — прибирати приведення типу
+            line = re.sub(r'(\=| |\()(int|float|str|bool|tuple|list|dict|set)\s*\((.*?)\)', r'\3', line)
+
+            # Розбір структур керування
+            if line.startswith('if '):
+                condition = re.sub(r'^if\s+(.*):$', r'\1', line)
+                pseudocode += f'{condition}\n'
+            elif line.startswith('elif '):
+                condition = re.sub(r'^elif\s+(.*):$', r'\1', line)
+                pseudocode += f'{condition}\n'
+            elif line.startswith('else'):
                 pseudocode += ''
-            elif line[0:4] == 'elif':
-                pseudocode += re.sub(r'elif ', '', line)[0:-1]
-            elif line[0:3] == 'for':
-                pseudocode += re.sub(r'for ', '', line)[0:-1]
-            elif line[0:5] == 'while':
-                pseudocode += re.sub(r'while ', '', line)[0:-1]
-            elif line[0:3] == 'def':
-                pseudocode += 'function ' + re.sub(r'def |\:', '', line)[0:-1]
-            else:
-                if 'return ' in line:
-                    pseudocode += line.replace('return', 'return')
+            elif line.startswith('for '):
+                # for i in range(...) → i in range(...)
+                match = re.match(r'for\s+(\w+)\s+in\s+(.*):', line)
+                if match:
+                    var, rng = match.groups()
+                    pseudocode += f'{var} in {rng}\n'
                 else:
-                    if line.strip() == '':
-                        pseudocode += line
-                    else:
-                        pseudocode += f'{line}\n'
+                    pseudocode += line.rstrip(':') + '\n'
+            elif line.startswith('while '):
+                condition = re.sub(r'^while\s+(.*):$', r'\1', line)
+                pseudocode += f'{condition}\n'
+            elif line.startswith('def '):
+                func_name = re.sub(r'^def\s+(\w+)\s*\(.*\):$', r'\1', line)
+                pseudocode += f'function {func_name}\n'
+            else:
+                # Усі інші рядки — як є
+                pseudocode += line + '\n'
 
-        print(pseudocode)
         return pseudocode
