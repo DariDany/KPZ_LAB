@@ -289,30 +289,14 @@ class BlockDiagram(ABC):
 
     def _connect_same_lines_in_tree(self, code_tree: list) -> list:
         tree = []
-        lines = ''
 
-        for i in range(len(code_tree)):
-            line = code_tree[i]
-            if type(line) == str:
-                lines += line + '\n'
-                last_type = self._get_bd_type_of_line(line)
-                if i + 1 < len(code_tree):
-                    next_line = code_tree[i + 1]
-                    if type(next_line) != str:
-                        tree.append(lines)
-                        lines = ''
-                    elif self._get_bd_type_of_line(next_line) not in ['Block', 'Input / output',
-                                                                      'Display'] \
-                            or last_type != self._get_bd_type_of_line(
-                            next_line):
-                        tree.append(lines)
-                        lines = ''
-                else:
-                    tree.append(lines)
-                    lines = ''
+        for item in code_tree:
+            if isinstance(item, str):
+                tree.append(item.strip())  # Кожен рядок окремо
             else:
-                tree.append({list(line.keys())[0]: self._connect_same_lines_in_tree(
-                    list(line.values())[0])})
+                key = list(item.keys())[0]
+                value = item[key]
+                tree.append({key: self._connect_same_lines_in_tree(value)})
 
         return tree
 
@@ -328,6 +312,14 @@ class BlockDiagram(ABC):
     def _draw_arrow(self, start_end_pos: dict, start_end_indexes: dict, direction: dict, label: str = "") -> None:
         dirs = self._direction
         delta = self._last_arrow_pos_delta - 1
+
+        # 🔍 Перевірка: якщо така стрілка вже існує — нічого не додаємо
+        for arrow in self._diagram['arrows']:
+            if arrow['startIndex'] == start_end_indexes['start'] and \
+                    arrow['endIndex'] == start_end_indexes['end'] and \
+                    arrow.get('label', '') == label:
+                return  # дубль — не додаємо вдруге
+
         arrow = {
             "startIndex": start_end_indexes['start'],
             "endIndex": start_end_indexes['end'],
@@ -335,7 +327,7 @@ class BlockDiagram(ABC):
             "endConnectorIndex": direction['end'],
             "nodes": [],
             "counts": [],
-            "label": label  # Додано мітку
+            "label": label
         }
 
         x1 = start_end_pos['start']['x']
@@ -440,67 +432,53 @@ class BlockDiagram(ABC):
         blocks = self._find_blocks_by_property('parent_id', parent_id)
         dirs = self._direction
 
-        for i in range(len(blocks)):
+        i = 0
+        while i < len(blocks):
             b_c = blocks[i]
-            if i + 1 <= len(blocks) - 1:
-                b_n = blocks[i + 1]
-            else:
-                b_n = None
+            b_n = blocks[i + 1] if i + 1 < len(blocks) else None
             struct_type = b_c['struct_type']
             cur_id = b_c['cur_el_id']
 
-            if (struct_type == 'block' or struct_type == 'output') and b_n is not None:
-                self._connect_blocks(
-                    b_c, b_n, {'start': dirs['DOWN'], 'end': dirs['UP']})
-            else:
-                if struct_type == 'loop':
-                    body = self._find_blocks_by_property('parent_id', cur_id)
-                    if body:
-                        # Connect condition to body (YES path)
-                        self._connect_blocks(b_c, body[0],
-                                             {'start': dirs['DOWN'], 'end': dirs['UP']},
-                                             label="так")
+            if struct_type in ['block', 'output'] and b_n:
+                self._connect_blocks(b_c, b_n, {'start': dirs['DOWN'], 'end': dirs['UP']})
 
-                        # Connect body back to condition
-                        self._connect_blocks(body[-1], b_c,
-                                             {'start': dirs['DOWN'], 'end': dirs['UP']},
-                                             label="loop")
-
-                        # Connect condition to next block (NO/exit path)
-                        if b_n is not None:
-                            self._connect_blocks(b_c, b_n,
-                                                 {'start': dirs['RIGHT'], 'end': dirs['UP']},
-                                                 label="ні")
-
-                    # Handle any nested structures in the loop
-                    for item in self._find_farthest_children([b_c]):
-                        if item['struct_type'] == 'if':
-                            self._connect_blocks(
-                                item, b_c, {'start': dirs['LEFT'], 'end': dirs['RIGHT']})
-                        else:
-                            self._connect_blocks(
-                                item, b_c, {'start': dirs['DOWN'], 'end': dirs['RIGHT']})
-
-                if struct_type == 'if':
-                    if_body = self._find_blocks_by_property('parent_id', cur_id)
-                    else_body = self._find_blocks_by_property('parent_id', cur_id + '-else')
-
-                    # Add "yes" and "no" labels
-                    if len(else_body) > 0:
-                        self._connect_blocks(b_c, else_body[0],
-                                             {'start': dirs['LEFT'], 'end': dirs['UP']}, label="ні")
-                    self._connect_blocks(b_c, if_body[0],
-                                         {'start': dirs['RIGHT'], 'end': dirs['UP']}, label="так")
+            elif struct_type == 'loop':
+                body = self._find_blocks_by_property('parent_id', cur_id)
+                if body:
+                    self._connect_blocks(b_c, body[0], {'start': dirs['DOWN'], 'end': dirs['UP']}, label="так")
+                    self._connect_blocks(body[-1], b_c, {'start': dirs['DOWN'], 'end': dirs['UP']})
+                    if b_n:
+                        self._connect_blocks(b_c, b_n, {'start': dirs['RIGHT'], 'end': dirs['UP']}, label="ні")
                     self._connect_all_blocks_by_arrows(cur_id)
+
+            elif struct_type == 'if':
+                if_body = self._find_blocks_by_property('parent_id', cur_id)
+                else_body = self._find_blocks_by_property('parent_id', cur_id + '-else')
+                next_block = b_n
+
+                if if_body:
+                    self._connect_blocks(b_c, if_body[0], {'start': dirs['RIGHT'], 'end': dirs['UP']}, label="так")
+                    self._connect_all_blocks_by_arrows(cur_id)
+
+                if else_body:
+                    self._connect_blocks(b_c, else_body[0], {'start': dirs['LEFT'], 'end': dirs['UP']}, label="ні")
                     self._connect_all_blocks_by_arrows(cur_id + '-else')
 
-                    for item in self._find_farthest_children([b_c]):
-                        if item == b_c and b_n is not None:
-                            self._connect_blocks(
-                                item, b_n, {'start': dirs['LEFT'], 'end': dirs['UP']})
-                        elif b_n is not None:
-                            self._connect_blocks(
-                                item, b_n, {'start': dirs['DOWN'], 'end': dirs['UP']})
+                if if_body and else_body:
+                    self._connect_blocks(if_body[-1], next_block, {'start': dirs['DOWN'], 'end': dirs['UP']})
+                    self._connect_blocks(else_body[-1], next_block, {'start': dirs['DOWN'], 'end': dirs['UP']})
+                    i += 1  # пропускаємо наступний, бо вже пов'язаний
+
+                elif if_body:
+                    self._connect_blocks(if_body[-1], next_block, {'start': dirs['DOWN'], 'end': dirs['UP']})
+                    i += 1
+
+                elif else_body:
+                    self._connect_blocks(else_body[-1], next_block, {'start': dirs['DOWN'], 'end': dirs['UP']})
+                    i += 1
+
+            i += 1
+
     def _find_farthest_children(self, blocks: list) -> list:
         children = []
         if len(blocks) == 0:
