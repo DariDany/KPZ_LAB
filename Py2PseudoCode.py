@@ -30,7 +30,8 @@ class Py2PseudoCode(PseudoCode):
             line = re.sub(r'print\s*\((.*)\)', r'\1', line)
 
             # input, int(...), float(...) тощо — прибирати приведення типу
-            line = re.sub(r'(\=| |\()(int|float|str|bool|tuple|list|dict|set)\s*\((.*?)\)', r'\3', line)
+            line = re.sub(
+                r'(\=| |\()(int|float|str|bool|tuple|list|dict|set)\s*\((.*?)\)', r'\3', line)
 
             # Розбір структур керування
             if line.startswith('if '):
@@ -42,11 +43,11 @@ class Py2PseudoCode(PseudoCode):
             elif line.startswith('else'):
                 pseudocode += ''
             elif line.startswith('for '):
-                # for i in range(...) → i in range(...)
-                match = re.match(r'for\s+(\w+)\s+in\s+(.*):', line)
+                match = re.match(
+                    r'for\s+(\w+)\s+in\s+range\((\d+),\s*(\d+)\):', line)
                 if match:
-                    var, rng = match.groups()
-                    pseudocode += f'{var} in {rng}\n'
+                    var, start, end = match.groups()
+                    pseudocode += f'{var} <= {end}\n'
                 else:
                     pseudocode += line.rstrip(':') + '\n'
             elif line.startswith('while '):
@@ -58,5 +59,5 @@ class Py2PseudoCode(PseudoCode):
             else:
                 # Усі інші рядки — як є
                 pseudocode += line + '\n'
-
+        print(pseudocode)
         return pseudocode

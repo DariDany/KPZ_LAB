@@ -78,7 +78,8 @@ class Preprocessor(ABC):
             name = self._get_function_name(head)
             variables += self._get_fun_args(head, name)
 
-            programs_list.append({'code': body, 'name': name, 'variables': variables})
+            programs_list.append(
+                {'code': body, 'name': name, 'variables': variables})
 
         for p in programs_list:
             if p['name'] == 'main':
@@ -89,6 +90,7 @@ class Preprocessor(ABC):
                     {'code': main, 'name': 'main', 'variables': self._find_all_veribles(main)})
             return programs_list
 
+        print("Serialized main:", main)
         return programs_list
 
     @abstractmethod

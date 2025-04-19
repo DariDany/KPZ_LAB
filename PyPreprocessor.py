@@ -10,12 +10,13 @@ class PyPreprocessor(Preprocessor):
             # del single-line comments
             i = re.sub(r'\#.*', '', i)
             striped_i = i.strip()
-            if striped_i != '\n' and striped_i != '\n' and striped_i != '':                
+            if striped_i != '\n' and striped_i != '\n' and striped_i != '':
                 # single-line to many
                 if self._is_control_structure(i) and striped_i[-1] != ':':
                     body = striped_i.split(':')[-1]
                     self._parsed_code.append(i.replace(body, ''))
-                    body = self._set_level_of_line(body, self._get_level_of_line(i)+1)
+                    body = self._set_level_of_line(
+                        body, self._get_level_of_line(i)+1)
                     self._parsed_code.append(body)
                 else:
                     self._parsed_code.append(i)
@@ -30,11 +31,12 @@ class PyPreprocessor(Preprocessor):
 
             if self._is_control_structure(item):
                 end = self._find_end_of_body(code, i)
-                levels.append({item.strip(): self._get_serealized_code(code[i+1:end+1])})
+                levels.append(
+                    {item.strip(): self._get_serealized_code(code[i+1:end+1])})
                 i = end
             else:
                 levels.append(item.strip())
-            
+
             i += 1
 
         return levels
@@ -42,7 +44,7 @@ class PyPreprocessor(Preprocessor):
     def _cut_functions(self, serealized_code: list):
         serealized_code_copy = serealized_code.copy()
         functions = []
-        
+
         for i in range(len(serealized_code_copy)):
             if i >= len(serealized_code_copy):
                 continue
@@ -50,11 +52,12 @@ class PyPreprocessor(Preprocessor):
             if type(line) == dict:
                 key = list(line.keys())[0]
                 value = list(line.values())[0]
-                if 'def' in key:    
+                if 'def' in key:
                     functions.append(line)
                     functions += self._cut_functions(value).copy()
-                    serealized_code.pop(i - (len(serealized_code_copy) - len(serealized_code)))
-                    
+                    serealized_code.pop(
+                        i - (len(serealized_code_copy) - len(serealized_code)))
+
         return functions
 
     def _find_end_of_body(self, code: list, position: int) -> int:
@@ -90,7 +93,7 @@ class PyPreprocessor(Preprocessor):
         if not code:
             code = self._parsed_code
         m = []
-        
+
         # find ver statements
         for string in code:
             if type(string) == str:
@@ -101,23 +104,25 @@ class PyPreprocessor(Preprocessor):
                     m += re.findall(r'for (\w+)', string)
                     m += re.findall(r'in +(\w+)\.?', string)
                     if '(' in string:
-                        m += re.findall(r'[a-zA-Z_0-9]+', string[string.index('(') + 1:string[::-1].index(')')])
+                        m += re.findall(r'[a-zA-Z_0-9]+',
+                                        string[string.index('(') + 1:string[::-1].index(')')])
                 except ValueError:
                     print('wrong syntax on line:', f'"{string}"')
             else:
                 value = list(string.values())[0]
                 m += self._find_all_veribles(value)
-        
+
         m = list(set(m))
-        
+
         # remove special words
-        special_words = ['True', 'False', 'and', 'len', 'input', 'print', 'int', 'range']
+        special_words = ['True', 'False', 'and',
+                         'len', 'input', 'print', 'int', 'range']
         for sw in special_words:
             if sw in m:
                 m.remove(sw)
         # remove nums
         new_m = []
-        for e in m: 
+        for e in m:
             if not e.isdigit():
                 new_m.append(e)
         m = new_m
@@ -132,11 +137,12 @@ class PyPreprocessor(Preprocessor):
                 output += i
             else:
                 break
-        
+
         return output
 
     def _get_fun_args(self, line: str, fun_name='') -> list:
-        line = line[line.index(f'{fun_name}(')+len(fun_name) + 1:line.index(')')] + ','
+        line = line[line.index(
+            f'{fun_name}(')+len(fun_name) + 1:line.index(')')] + ','
         args = []
         last_arg = ''
         for i in line:
@@ -155,4 +161,4 @@ class PyPreprocessor(Preprocessor):
     def _is_control_structure(line: str) -> bool:
         line = line.strip()
 
-        return line[0:2] == 'if' or line[0:3] == 'for' or line[0:5] == 'while' or line[0:4] == 'else' or line[0:4] == 'def '
+        return line[0:2] == 'if' or line[0:4] == 'elif' or line[0:3] == 'for' or line[0:5] == 'while' or line[0:4] == 'else' or line[0:4] == 'def '

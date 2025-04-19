@@ -267,7 +267,7 @@ class BlockDiagram(ABC):
                     key, {'x': 0, 'y': self._last_y}, cur_el_id, parent_id)
                 if 'if ' in key:
                     self._last_if_id_list.append(cur_el_id)
-                if block is not None and 'elif' not in key:
+                if block is not None:
                     blocks.append(block)
                     blocks += self._add_blocks(value, cur_el_id)
                 elif 'else' == key.replace(':', '').strip():
@@ -275,16 +275,46 @@ class BlockDiagram(ABC):
                     blocks += self._add_blocks(value,
                                                self._last_if_id_list[-1] + '-else')
                     self._last_if_id_list.pop()
-                elif 'elif' in key:
-                    self._last_y -= self._blocks_indent
-                    blocks += self._add_blocks(value,
-                                               self._last_if_id_list[-1] + '-else')
-                    self._last_if_id_list.pop()
+                elif 'for ' in key:
+                    self._last_y += 50  # Добавим небольшой отступ для цикла
+                    blocks.append(block)
+                    blocks += self._add_for_loop_block(value, cur_el_id)
+                elif 'while ' in key:
+                    self._last_y += 50  # Добавим небольшой отступ для цикла
+                    blocks.append(block)
+                    blocks += self._add_while_loop_block(value, cur_el_id)
                 else:
                     self._last_y -= self._blocks_indent
                     blocks += self._add_blocks(value,
                                                self._last_if_id_list[-1])
 
+        return blocks
+
+    def _add_for_loop_block(self, body, parent_id):
+        blocks = []
+        for line in body:
+            cur_el_id = uuid.uuid1().hex
+            self._last_y += self._blocks_indent
+            block = self._form_block(
+                line, {'x': 0, 'y': self._last_y}, cur_el_id, parent_id)
+            if block is not None:
+                blocks.append(block)
+            else:
+                self._last_y -= self._blocks_indent
+
+        return blocks
+
+    def _add_while_loop_block(self, body, parent_id):
+        blocks = []
+        for line in body:
+            cur_el_id = uuid.uuid1().hex
+            self._last_y += self._blocks_indent
+            block = self._form_block(
+                line, {'x': 0, 'y': self._last_y}, cur_el_id, parent_id)
+            if block is not None:
+                blocks.append(block)
+            else:
+                self._last_y -= self._blocks_indent
         return blocks
 
     def _connect_same_lines_in_tree(self, code_tree: list) -> list:
@@ -386,11 +416,13 @@ class BlockDiagram(ABC):
 
     def _connect_blocks(self, block1: dict, block2: dict, direction: dict, label: str = "") -> None:
         self._draw_arrow(
-            {'start': {'y': block1['y'], 'x': block1['x']}, 'end': {'y': block2['y'], 'x': block2['x']}},
+            {'start': {'y': block1['y'], 'x': block1['x']},
+                'end': {'y': block2['y'], 'x': block2['x']}},
             {'start': block1['index'], 'end': block2['index']},
             direction,
             label  # Передаємо мітку
         )
+
     def _align_if_else_bodies(self) -> None:
         if_structs = self._find_blocks_by_property('struct_type', 'if')
 
@@ -398,18 +430,31 @@ class BlockDiagram(ABC):
             struct_id = if_struct['cur_el_id']
 
             if_body = self._find_blocks_by_property('parent_id', struct_id)
+            elif_body = self._find_blocks_by_property(
+                'parent_id', struct_id + '-elif')
             else_body = self._find_blocks_by_property(
                 'parent_id', struct_id + '-else')
-            max_width_if_body = max([i['width'] for i in if_body])
+            max_width_if_body = max([i['width']
+                                    for i in if_body]) if if_body else 0
 
             base_x = if_struct['x']
+
+            # Aligning if body blocks
             for block in if_body:
                 block['x'] = base_x + max_width_if_body
 
-            base_y = if_body[0]['y']
-            for block in else_body:
+            base_y = if_body[0]['y'] if if_body else 0
+
+            # Aligning elif body blocks
+            for block in elif_body:
+                block['x'] = base_x + max_width_if_body
                 block['y'] = base_y
+                base_y += 100
+
+            # Aligning else body blocks
+            for block in else_body:
                 block['x'] = base_x - max_width_if_body
+                block['y'] = base_y
                 base_y += 100
 
     def _find_blocks_by_property(self, block_property: str, value, required_field='', block_list=None) -> list:
@@ -431,8 +476,8 @@ class BlockDiagram(ABC):
     def _connect_all_blocks_by_arrows(self, parent_id='0') -> None:
         blocks = self._find_blocks_by_property('parent_id', parent_id)
         dirs = self._direction
-
         i = 0
+
         while i < len(blocks):
             b_c = blocks[i]
             b_n = blocks[i + 1] if i + 1 < len(blocks) else None
@@ -440,42 +485,63 @@ class BlockDiagram(ABC):
             cur_id = b_c['cur_el_id']
 
             if struct_type in ['block', 'output'] and b_n:
-                self._connect_blocks(b_c, b_n, {'start': dirs['DOWN'], 'end': dirs['UP']})
+                self._connect_blocks(
+                    b_c, b_n, {'start': dirs['DOWN'], 'end': dirs['UP']})
 
             elif struct_type == 'loop':
                 body = self._find_blocks_by_property('parent_id', cur_id)
                 if body:
-                    self._connect_blocks(b_c, body[0], {'start': dirs['DOWN'], 'end': dirs['UP']}, label="так")
-                    self._connect_blocks(body[-1], b_c, {'start': dirs['DOWN'], 'end': dirs['UP']})
-                    if b_n:
-                        self._connect_blocks(b_c, b_n, {'start': dirs['RIGHT'], 'end': dirs['UP']}, label="ні")
+                    # Подключение блока начала тела цикла
+                    self._connect_blocks(
+                        b_c, body[0], {'start': dirs['DOWN'], 'end': dirs['UP']}, label="так" if i <= 6 else "ні"
+                    )
+
+                    # Подключение всех блоков цикла с учетом стрелок
                     self._connect_all_blocks_by_arrows(cur_id)
+
+                    # Подключение последнего блока тела цикла, стрелка назад
+                    self._connect_blocks(
+                        body[-1], b_c, {'start': dirs['DOWN'],
+                                        'end': dirs['UP']}
+                    )
+
+                    # Если b_n существует, подключаем стрелку к следующему элементу после цикла
+                    if b_n:
+                        self._connect_blocks(
+                            b_c, b_n, {'start': dirs['RIGHT'], 'end': dirs['UP']}, label="ні" if i > 6 else None
+                        )
 
             elif struct_type == 'if':
                 if_body = self._find_blocks_by_property('parent_id', cur_id)
-                else_body = self._find_blocks_by_property('parent_id', cur_id + '-else')
-                next_block = b_n
+                else_body = self._find_blocks_by_property(
+                    'parent_id', cur_id + '-else')
 
+                # Подключаем "так" и "ні"
                 if if_body:
-                    self._connect_blocks(b_c, if_body[0], {'start': dirs['RIGHT'], 'end': dirs['UP']}, label="так")
+                    self._connect_blocks(
+                        b_c, if_body[0], {'start': dirs['RIGHT'], 'end': dirs['UP']}, label="так")
                     self._connect_all_blocks_by_arrows(cur_id)
 
                 if else_body:
-                    self._connect_blocks(b_c, else_body[0], {'start': dirs['LEFT'], 'end': dirs['UP']}, label="ні")
+                    self._connect_blocks(
+                        b_c, else_body[0], {'start': dirs['LEFT'], 'end': dirs['UP']}, label="ні")
                     self._connect_all_blocks_by_arrows(cur_id + '-else')
 
-                if if_body and else_body:
-                    self._connect_blocks(if_body[-1], next_block, {'start': dirs['DOWN'], 'end': dirs['UP']})
-                    self._connect_blocks(else_body[-1], next_block, {'start': dirs['DOWN'], 'end': dirs['UP']})
-                    i += 1  # пропускаємо наступний, бо вже пов'язаний
-
-                elif if_body:
-                    self._connect_blocks(if_body[-1], next_block, {'start': dirs['DOWN'], 'end': dirs['UP']})
-                    i += 1
-
-                elif else_body:
-                    self._connect_blocks(else_body[-1], next_block, {'start': dirs['DOWN'], 'end': dirs['UP']})
-                    i += 1
+                # Правильный выход из if/else
+                continuation_block = b_n
+                if continuation_block:
+                    if if_body:
+                        farthest = self._find_farthest_children([if_body[-1]])
+                        for last in farthest:
+                            self._connect_blocks(
+                                last, continuation_block, {'start': dirs['DOWN'], 'end': dirs['UP']})
+                    if else_body:
+                        farthest = self._find_farthest_children(
+                            [else_body[-1]])
+                        for last in farthest:
+                            self._connect_blocks(
+                                last, continuation_block, {'start': dirs['DOWN'], 'end': dirs['UP']})
+                    continuation_block['parent_id'] = cur_id
 
             i += 1
 
