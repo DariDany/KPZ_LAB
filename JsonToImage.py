@@ -3,31 +3,43 @@ import json
 import os
 import sys
 
-# Получаем путь к JSON-файлу из аргументов
+# Перевірка: чи передано шлях до JSON-файлу через аргументи командного рядка
 if len(sys.argv) < 2:
     print("Потрібен шлях до JSON-файлу.")
     sys.exit(1)
 
+# Отримуємо шлях до JSON-файлу з аргументів командного рядка
 json_path = sys.argv[1]
-output_name = os.path.splitext(json_path)[0]  # example.py.json → example.py
+
+# Видаляємо розширення .json з імені файлу
+output_name = os.path.splitext(json_path)[0]
 
 with open(json_path, "r", encoding='utf-8') as f:
     data = json.load(f)
 
 
 def json_to_flowchart(json_data, output_file="flowchart"):
-    dot = Digraph(format="png")
+    """
+    Побудова блок-схеми на основі структури з JSON-файлу.
 
+    Args:
+        json_data (dict): Дані блоків та стрілок у форматі JSON.
+        output_file (str): Назва вихідного файлу (без розширення).
+    """
+    dot = Digraph(format="png")  # Створюємо об'єкт графу у форматі PNG
+
+    # Додаємо всі блоки до графу
     for block in json_data["blocks"]:
         dot.node(block["cur_el_id"], block["text"], shape=block["shape"])
 
+    # Додаємо стрілки між блоками
     for arrow in json_data["arrows"]:
-        # Додаємо мітку, якщо вона є
         label = arrow.get("label", "")
+        # Додаємо стрілку від початкового до кінцевого блоку
         dot.edge(
             json_data["blocks"][arrow["startIndex"]]["cur_el_id"],
             json_data["blocks"][arrow["endIndex"]]["cur_el_id"],
-            label=label  # Додано мітку
+            label=label  # Додаємо мітку до стрілки
         )
 
     if os.path.exists(output_file + ".png"):

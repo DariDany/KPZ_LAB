@@ -3,12 +3,12 @@ class PseudoCode:
     @staticmethod
     def to_pseudocode(lines: str) -> str:
         """
-        Translates lines to pseudocode
+        Перетворює переданий текстовий код у псевдокод.
 
-        Args:
-            lines: multi-line str
+        Аргументи:
+            lines: рядки коду (можуть містити декілька рядків)
 
-        Returns:
-            str
+        Повертає:
+            str: псевдокод у вигляді рядка
         """
         return lines
