@@ -1,5 +1,6 @@
 sum = 0
 for i in range(1, 6):
+    sum += i
     for j in range(1, 4):
         sum += j
         k = 0

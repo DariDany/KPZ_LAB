@@ -2,7 +2,7 @@
     "blocks": [
         {
             "code": "Start",
-            "cur_el_id": "f855c86b1d3711f09f768cc84b7067bc",
+            "cur_el_id": "e8bd6e1b1dbe11f0bf348cc84b7067bc",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
@@ -23,7 +23,7 @@
         },
         {
             "code": "sum = 0",
-            "cur_el_id": "f856062d1d3711f095a68cc84b7067bc",
+            "cur_el_id": "e8bd7bde1dbe11f09db58cc84b7067bc",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
@@ -44,7 +44,7 @@
         },
         {
             "code": "for i in range(1, 6):",
-            "cur_el_id": "f856243f1d3711f0af5f8cc84b7067bc",
+            "cur_el_id": "e8bd87db1dbe11f0be9f8cc84b7067bc",
             "parent_id": "0",
             "struct_type": "loop",
             "x": 0,
@@ -64,12 +64,33 @@
             "index": 2
         },
         {
+            "code": "sum += i",
+            "cur_el_id": "e8bd94041dbe11f08afd8cc84b7067bc",
+            "parent_id": "e8bd87db1dbe11f0be9f8cc84b7067bc",
+            "struct_type": "block",
+            "x": 0,
+            "y": 500,
+            "text": "sum = sum + i\n",
+            "width": 100,
+            "height": 40,
+            "type": "Block",
+            "shape": "rectangle",
+            "isMenuBlock": false,
+            "fontSize": 14,
+            "textHeight": 14,
+            "isBold": false,
+            "isItalic": false,
+            "textAlign": "center",
+            "labelsPosition": 1,
+            "index": 3
+        },
+        {
             "code": "for j in range(1, 4):",
-            "cur_el_id": "f8564b1f1d3711f096d68cc84b7067bc",
-            "parent_id": "f856243f1d3711f0af5f8cc84b7067bc",
+            "cur_el_id": "e8bd9bd31dbe11f086168cc84b7067bc",
+            "parent_id": "e8bd87db1dbe11f0be9f8cc84b7067bc",
             "struct_type": "loop",
             "x": 0,
-            "y": 450,
+            "y": 650,
             "text": "j <= 4\n",
             "width": 189,
             "height": 40,
@@ -82,37 +103,16 @@
             "isItalic": false,
             "textAlign": "center",
             "labelsPosition": 1,
-            "index": 3
-        },
-        {
-            "code": "sum += j",
-            "cur_el_id": "f85660c21d3711f0a9548cc84b7067bc",
-            "parent_id": "f8564b1f1d3711f096d68cc84b7067bc",
-            "struct_type": "block",
-            "x": 0,
-            "y": 600,
-            "text": "sum = sum + j\n",
-            "width": 100,
-            "height": 40,
-            "type": "Block",
-            "shape": "rectangle",
-            "isMenuBlock": false,
-            "fontSize": 14,
-            "textHeight": 14,
-            "isBold": false,
-            "isItalic": false,
-            "textAlign": "center",
-            "labelsPosition": 1,
             "index": 4
         },
         {
-            "code": "k = 0",
-            "cur_el_id": "f8567b1f1d3711f099788cc84b7067bc",
-            "parent_id": "f8564b1f1d3711f096d68cc84b7067bc",
+            "code": "sum += j",
+            "cur_el_id": "e8bda38c1dbe11f0832b8cc84b7067bc",
+            "parent_id": "e8bd9bd31dbe11f086168cc84b7067bc",
             "struct_type": "block",
             "x": 0,
-            "y": 750,
-            "text": "k = 0\n",
+            "y": 850,
+            "text": "sum = sum + j\n",
             "width": 100,
             "height": 40,
             "type": "Block",
@@ -127,12 +127,33 @@
             "index": 5
         },
         {
+            "code": "k = 0",
+            "cur_el_id": "e8bdaad71dbe11f0b5ad8cc84b7067bc",
+            "parent_id": "e8bd9bd31dbe11f086168cc84b7067bc",
+            "struct_type": "block",
+            "x": 0,
+            "y": 1000,
+            "text": "k = 0\n",
+            "width": 100,
+            "height": 40,
+            "type": "Block",
+            "shape": "rectangle",
+            "isMenuBlock": false,
+            "fontSize": 14,
+            "textHeight": 14,
+            "isBold": false,
+            "isItalic": false,
+            "textAlign": "center",
+            "labelsPosition": 1,
+            "index": 6
+        },
+        {
             "code": "while k < 2:",
-            "cur_el_id": "f85693631d3711f0b2238cc84b7067bc",
-            "parent_id": "f8564b1f1d3711f096d68cc84b7067bc",
+            "cur_el_id": "e8bdb0641dbe11f091f58cc84b7067bc",
+            "parent_id": "e8bd9bd31dbe11f086168cc84b7067bc",
             "struct_type": "loop",
             "x": 0,
-            "y": 900,
+            "y": 1150,
             "text": "k < 2\n",
             "width": 108,
             "height": 40,
@@ -145,37 +166,16 @@
             "isItalic": false,
             "textAlign": "center",
             "labelsPosition": 1,
-            "index": 6
-        },
-        {
-            "code": "sum += k",
-            "cur_el_id": "f856b2661d3711f0a9e18cc84b7067bc",
-            "parent_id": "f85693631d3711f0b2238cc84b7067bc",
-            "struct_type": "block",
-            "x": 0,
-            "y": 1050,
-            "text": "sum = sum + k\n",
-            "width": 100,
-            "height": 40,
-            "type": "Block",
-            "shape": "rectangle",
-            "isMenuBlock": false,
-            "fontSize": 14,
-            "textHeight": 14,
-            "isBold": false,
-            "isItalic": false,
-            "textAlign": "center",
-            "labelsPosition": 1,
             "index": 7
         },
         {
-            "code": "k += 1",
-            "cur_el_id": "f856cb8f1d3711f09dd28cc84b7067bc",
-            "parent_id": "f85693631d3711f0b2238cc84b7067bc",
+            "code": "sum += k",
+            "cur_el_id": "e8bdba411dbe11f09bd68cc84b7067bc",
+            "parent_id": "e8bdb0641dbe11f091f58cc84b7067bc",
             "struct_type": "block",
             "x": 0,
-            "y": 1200,
-            "text": "k = k + 1\n",
+            "y": 1350,
+            "text": "sum = sum + k\n",
             "width": 100,
             "height": 40,
             "type": "Block",
@@ -190,12 +190,75 @@
             "index": 8
         },
         {
+            "code": "k += 1",
+            "cur_el_id": "e8bdc0761dbe11f0bd7d8cc84b7067bc",
+            "parent_id": "e8bdb0641dbe11f091f58cc84b7067bc",
+            "struct_type": "block",
+            "x": 0,
+            "y": 1500,
+            "text": "k = k + 1\n",
+            "width": 100,
+            "height": 40,
+            "type": "Block",
+            "shape": "rectangle",
+            "isMenuBlock": false,
+            "fontSize": 14,
+            "textHeight": 14,
+            "isBold": false,
+            "isItalic": false,
+            "textAlign": "center",
+            "labelsPosition": 1,
+            "index": 9
+        },
+        {
+            "code": "j = j + 1",
+            "cur_el_id": "e8bdc6461dbe11f0bde28cc84b7067bc",
+            "parent_id": "e8bd9bd31dbe11f086168cc84b7067bc",
+            "struct_type": "block",
+            "x": 0,
+            "y": 1650,
+            "text": "j = j + 1\n",
+            "width": 100,
+            "height": 40,
+            "type": "Block",
+            "shape": "rectangle",
+            "isMenuBlock": false,
+            "fontSize": 14,
+            "textHeight": 14,
+            "isBold": false,
+            "isItalic": false,
+            "textAlign": "center",
+            "labelsPosition": 1,
+            "index": 10
+        },
+        {
+            "code": "i = i + 1",
+            "cur_el_id": "e8bdcbee1dbe11f0becc8cc84b7067bc",
+            "parent_id": "e8bd87db1dbe11f0be9f8cc84b7067bc",
+            "struct_type": "block",
+            "x": 0,
+            "y": 1800,
+            "text": "i = i + 1\n",
+            "width": 100,
+            "height": 40,
+            "type": "Block",
+            "shape": "rectangle",
+            "isMenuBlock": false,
+            "fontSize": 14,
+            "textHeight": 14,
+            "isBold": false,
+            "isItalic": false,
+            "textAlign": "center",
+            "labelsPosition": 1,
+            "index": 11
+        },
+        {
             "code": "print(sum)",
-            "cur_el_id": "f856e0231d3711f0ac7b8cc84b7067bc",
+            "cur_el_id": "e8bdd0a81dbe11f0ad058cc84b7067bc",
             "parent_id": "0",
             "struct_type": "output",
             "x": 0,
-            "y": 1350,
+            "y": 1950,
             "text": "sum\n",
             "width": 100,
             "height": 40,
@@ -208,15 +271,15 @@
             "isItalic": false,
             "textAlign": "center",
             "labelsPosition": 1,
-            "index": 9
+            "index": 12
         },
         {
             "code": "End",
-            "cur_el_id": "f856faae1d3711f097e38cc84b7067bc",
+            "cur_el_id": "e8bdd5821dbe11f09ec08cc84b7067bc",
             "parent_id": "0",
             "struct_type": "block",
             "x": 0,
-            "y": 1450,
+            "y": 2050,
             "text": "End\n",
             "width": 100,
             "height": 40,
@@ -229,7 +292,7 @@
             "isItalic": false,
             "textAlign": "center",
             "labelsPosition": 1,
-            "index": 10
+            "index": 13
         }
     ],
     "arrows": [
@@ -316,20 +379,20 @@
                     "y": 300
                 },
                 {
-                    "x": 132,
+                    "x": 72,
                     "y": 300
                 },
                 {
-                    "x": 132,
-                    "y": 410
+                    "x": 72,
+                    "y": 460
                 },
                 {
                     "x": 0,
-                    "y": 410
+                    "y": 460
                 },
                 {
                     "x": 0,
-                    "y": 490
+                    "y": 540
                 }
             ],
             "counts": [
@@ -349,59 +412,23 @@
             "nodes": [
                 {
                     "x": 0,
-                    "y": 450
+                    "y": 500
                 },
                 {
-                    "x": 71,
-                    "y": 450
+                    "x": 131,
+                    "y": 500
                 },
                 {
-                    "x": 71,
-                    "y": 560
-                },
-                {
-                    "x": 0,
-                    "y": 560
+                    "x": 131,
+                    "y": 610
                 },
                 {
                     "x": 0,
-                    "y": 640
-                }
-            ],
-            "counts": [
-                1,
-                1,
-                1,
-                1,
-                1
-            ],
-            "label": "\u0442\u0430\u043a"
-        },
-        {
-            "startIndex": 4,
-            "endIndex": 5,
-            "startConnectorIndex": 2,
-            "endConnectorIndex": 0,
-            "nodes": [
-                {
-                    "x": 0,
-                    "y": 600
-                },
-                {
-                    "x": 70,
-                    "y": 600
-                },
-                {
-                    "x": 70,
-                    "y": 710
+                    "y": 610
                 },
                 {
                     "x": 0,
-                    "y": 710
-                },
-                {
-                    "x": 0,
-                    "y": 790
+                    "y": 690
                 }
             ],
             "counts": [
@@ -414,6 +441,42 @@
             "label": ""
         },
         {
+            "startIndex": 4,
+            "endIndex": 5,
+            "startConnectorIndex": 2,
+            "endConnectorIndex": 0,
+            "nodes": [
+                {
+                    "x": 0,
+                    "y": 650
+                },
+                {
+                    "x": 70,
+                    "y": 650
+                },
+                {
+                    "x": 70,
+                    "y": 810
+                },
+                {
+                    "x": 0,
+                    "y": 810
+                },
+                {
+                    "x": 0,
+                    "y": 890
+                }
+            ],
+            "counts": [
+                1,
+                1,
+                1,
+                1,
+                1
+            ],
+            "label": "\u0442\u0430\u043a"
+        },
+        {
             "startIndex": 5,
             "endIndex": 6,
             "startConnectorIndex": 2,
@@ -421,23 +484,23 @@
             "nodes": [
                 {
                     "x": 0,
-                    "y": 750
+                    "y": 850
                 },
                 {
                     "x": 69,
-                    "y": 750
+                    "y": 850
                 },
                 {
                     "x": 69,
-                    "y": 860
+                    "y": 960
                 },
                 {
                     "x": 0,
-                    "y": 860
+                    "y": 960
                 },
                 {
                     "x": 0,
-                    "y": 940
+                    "y": 1040
                 }
             ],
             "counts": [
@@ -457,23 +520,59 @@
             "nodes": [
                 {
                     "x": 0,
-                    "y": 900
+                    "y": 1000
                 },
                 {
                     "x": 68,
-                    "y": 900
+                    "y": 1000
                 },
                 {
                     "x": 68,
-                    "y": 1010
+                    "y": 1110
                 },
                 {
                     "x": 0,
-                    "y": 1010
+                    "y": 1110
                 },
                 {
                     "x": 0,
-                    "y": 1090
+                    "y": 1190
+                }
+            ],
+            "counts": [
+                1,
+                1,
+                1,
+                1,
+                1
+            ],
+            "label": ""
+        },
+        {
+            "startIndex": 7,
+            "endIndex": 8,
+            "startConnectorIndex": 2,
+            "endConnectorIndex": 0,
+            "nodes": [
+                {
+                    "x": 0,
+                    "y": 1150
+                },
+                {
+                    "x": 67,
+                    "y": 1150
+                },
+                {
+                    "x": 67,
+                    "y": 1310
+                },
+                {
+                    "x": 0,
+                    "y": 1310
+                },
+                {
+                    "x": 0,
+                    "y": 1390
                 }
             ],
             "counts": [
@@ -486,66 +585,30 @@
             "label": "\u0442\u0430\u043a"
         },
         {
-            "startIndex": 7,
-            "endIndex": 8,
-            "startConnectorIndex": 2,
-            "endConnectorIndex": 0,
-            "nodes": [
-                {
-                    "x": 0,
-                    "y": 1050
-                },
-                {
-                    "x": 67,
-                    "y": 1050
-                },
-                {
-                    "x": 67,
-                    "y": 1160
-                },
-                {
-                    "x": 0,
-                    "y": 1160
-                },
-                {
-                    "x": 0,
-                    "y": 1240
-                }
-            ],
-            "counts": [
-                1,
-                1,
-                1,
-                1,
-                1
-            ],
-            "label": ""
-        },
-        {
             "startIndex": 8,
-            "endIndex": 6,
+            "endIndex": 9,
             "startConnectorIndex": 2,
             "endConnectorIndex": 0,
             "nodes": [
                 {
                     "x": 0,
-                    "y": 1200
+                    "y": 1350
                 },
                 {
                     "x": 66,
-                    "y": 1200
+                    "y": 1350
                 },
                 {
                     "x": 66,
-                    "y": 860
+                    "y": 1460
                 },
                 {
                     "x": 0,
-                    "y": 860
+                    "y": 1460
                 },
                 {
                     "x": 0,
-                    "y": 940
+                    "y": 1540
                 }
             ],
             "counts": [
@@ -558,30 +621,30 @@
             "label": ""
         },
         {
-            "startIndex": 6,
-            "endIndex": 3,
+            "startIndex": 9,
+            "endIndex": 7,
             "startConnectorIndex": 2,
             "endConnectorIndex": 0,
             "nodes": [
                 {
                     "x": 0,
-                    "y": 900
+                    "y": 1500
                 },
                 {
-                    "x": 125,
-                    "y": 900
+                    "x": 65,
+                    "y": 1500
                 },
                 {
-                    "x": 125,
-                    "y": 410
-                },
-                {
-                    "x": 0,
-                    "y": 410
+                    "x": 65,
+                    "y": 1110
                 },
                 {
                     "x": 0,
-                    "y": 490
+                    "y": 1110
+                },
+                {
+                    "x": 0,
+                    "y": 1190
                 }
             ],
             "counts": [
@@ -594,21 +657,129 @@
             "label": ""
         },
         {
-            "startIndex": 3,
+            "startIndex": 7,
+            "endIndex": 10,
+            "startConnectorIndex": 1,
+            "endConnectorIndex": 0,
+            "nodes": [
+                {
+                    "x": 0,
+                    "y": 1150
+                },
+                {
+                    "x": 64,
+                    "y": 1150
+                },
+                {
+                    "x": 64,
+                    "y": 1610
+                },
+                {
+                    "x": 0,
+                    "y": 1610
+                },
+                {
+                    "x": 0,
+                    "y": 1690
+                }
+            ],
+            "counts": [
+                1,
+                1,
+                1,
+                1,
+                1
+            ],
+            "label": "\u043d\u0456"
+        },
+        {
+            "startIndex": 10,
+            "endIndex": 4,
+            "startConnectorIndex": 2,
+            "endConnectorIndex": 0,
+            "nodes": [
+                {
+                    "x": 0,
+                    "y": 1650
+                },
+                {
+                    "x": 123,
+                    "y": 1650
+                },
+                {
+                    "x": 123,
+                    "y": 610
+                },
+                {
+                    "x": 0,
+                    "y": 610
+                },
+                {
+                    "x": 0,
+                    "y": 690
+                }
+            ],
+            "counts": [
+                1,
+                1,
+                1,
+                1,
+                1
+            ],
+            "label": ""
+        },
+        {
+            "startIndex": 4,
+            "endIndex": 11,
+            "startConnectorIndex": 1,
+            "endConnectorIndex": 0,
+            "nodes": [
+                {
+                    "x": 0,
+                    "y": 650
+                },
+                {
+                    "x": 62,
+                    "y": 650
+                },
+                {
+                    "x": 62,
+                    "y": 1760
+                },
+                {
+                    "x": 0,
+                    "y": 1760
+                },
+                {
+                    "x": 0,
+                    "y": 1840
+                }
+            ],
+            "counts": [
+                1,
+                1,
+                1,
+                1,
+                1
+            ],
+            "label": "\u043d\u0456"
+        },
+        {
+            "startIndex": 11,
             "endIndex": 2,
             "startConnectorIndex": 2,
             "endConnectorIndex": 0,
             "nodes": [
                 {
                     "x": 0,
-                    "y": 450
+                    "y": 1800
                 },
                 {
-                    "x": 124,
-                    "y": 450
+                    "x": 121,
+                    "y": 1800
                 },
                 {
-                    "x": 124,
+                    "x": 121,
                     "y": 260
                 },
                 {
@@ -631,7 +802,7 @@
         },
         {
             "startIndex": 2,
-            "endIndex": 9,
+            "endIndex": 12,
             "startConnectorIndex": 1,
             "endConnectorIndex": 0,
             "nodes": [
@@ -640,20 +811,20 @@
                     "y": 300
                 },
                 {
-                    "x": 123,
+                    "x": 120,
                     "y": 300
                 },
                 {
-                    "x": 123,
-                    "y": 1310
+                    "x": 120,
+                    "y": 1910
                 },
                 {
                     "x": 0,
-                    "y": 1310
+                    "y": 1910
                 },
                 {
                     "x": 0,
-                    "y": 1390
+                    "y": 1990
                 }
             ],
             "counts": [
@@ -663,33 +834,33 @@
                 1,
                 1
             ],
-            "label": null
+            "label": "\u043d\u0456"
         },
         {
-            "startIndex": 9,
-            "endIndex": 10,
+            "startIndex": 12,
+            "endIndex": 13,
             "startConnectorIndex": 2,
             "endConnectorIndex": 0,
             "nodes": [
                 {
                     "x": 0,
-                    "y": 1350
+                    "y": 1950
                 },
                 {
-                    "x": 62,
-                    "y": 1350
+                    "x": 59,
+                    "y": 1950
                 },
                 {
-                    "x": 62,
-                    "y": 1410
-                },
-                {
-                    "x": 0,
-                    "y": 1410
+                    "x": 59,
+                    "y": 2010
                 },
                 {
                     "x": 0,
-                    "y": 1490
+                    "y": 2010
+                },
+                {
+                    "x": 0,
+                    "y": 2090
                 }
             ],
             "counts": [

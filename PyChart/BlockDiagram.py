@@ -1,3 +1,4 @@
+import re
 import uuid
 from abc import ABC, abstractmethod
 
@@ -267,26 +268,45 @@ class BlockDiagram(ABC):
                     key, {'x': 0, 'y': self._last_y}, cur_el_id, parent_id)
                 if 'if ' in key:
                     self._last_if_id_list.append(cur_el_id)
-                if block is not None:
-                    blocks.append(block)
-                    blocks += self._add_blocks(value, cur_el_id)
+
                 elif 'else' == key.replace(':', '').strip():
                     self._last_y -= self._blocks_indent
                     blocks += self._add_blocks(value,
                                                self._last_if_id_list[-1] + '-else')
                     self._last_if_id_list.pop()
                 elif 'for ' in key:
-                    self._last_y += 50  # Добавим небольшой отступ для цикла
-                    blocks.append(block)
-                    blocks += self._add_for_loop_block(value, cur_el_id)
+                    match = re.match(
+                        r'for\s+(\w+)\s+in\s+range\(([^,]+),\s*([^)]+)\):', key)
+
+                    if match:
+                        loop_var = match.group(1)
+                        increment_line = f'{loop_var} = {loop_var} + 1'
+                        if increment_line not in value:
+                            value.append(increment_line)
+
+                    self._last_y += 50
+
+                    if block is not None:
+                        blocks.append(block)
+
+                    blocks += self._add_blocks(value, cur_el_id)
+                    continue
+
                 elif 'while ' in key:
-                    self._last_y += 50  # Добавим небольшой отступ для цикла
-                    blocks.append(block)
-                    blocks += self._add_while_loop_block(value, cur_el_id)
+                    self._last_y += 50
+
+                    if block is not None:
+                        blocks.append(block)
+
+                    blocks += self._add_blocks(value, cur_el_id)
+                    continue
                 else:
                     self._last_y -= self._blocks_indent
                     blocks += self._add_blocks(value,
                                                self._last_if_id_list[-1])
+                if block is not None:
+                    blocks.append(block)
+                    blocks += self._add_blocks(value, cur_el_id)
 
         return blocks
 
@@ -491,25 +511,25 @@ class BlockDiagram(ABC):
             elif struct_type == 'loop':
                 body = self._find_blocks_by_property('parent_id', cur_id)
                 if body:
-                    # Подключение блока начала тела цикла
+                    # Стрелка "так" — в тело цикла
                     self._connect_blocks(
-                        b_c, body[0], {'start': dirs['DOWN'], 'end': dirs['UP']}, label="так" if i <= 6 else "ні"
+                        b_c, body[0], {'start': dirs['DOWN'], 'end': dirs['UP']}, label="так"
                     )
 
-                    # Подключение всех блоков цикла с учетом стрелок
+                    # Рекурсивная обработка тела цикла
                     self._connect_all_blocks_by_arrows(cur_id)
 
-                    # Подключение последнего блока тела цикла, стрелка назад
+                    # Стрелка назад от последнего блока тела к условию
                     self._connect_blocks(
                         body[-1], b_c, {'start': dirs['DOWN'],
                                         'end': dirs['UP']}
                     )
 
-                    # Если b_n существует, подключаем стрелку к следующему элементу после цикла
-                    if b_n:
-                        self._connect_blocks(
-                            b_c, b_n, {'start': dirs['RIGHT'], 'end': dirs['UP']}, label="ні" if i > 6 else None
-                        )
+                # Стрелка "ні" — к следующему блоку после цикла
+                if b_n:
+                    self._connect_blocks(
+                        b_c, b_n, {'start': dirs['RIGHT'], 'end': dirs['UP']}, label="ні"
+                    )
 
             elif struct_type == 'if':
                 if_body = self._find_blocks_by_property('parent_id', cur_id)
