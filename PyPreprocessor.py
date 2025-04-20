@@ -42,21 +42,27 @@ class PyPreprocessor(Preprocessor):
         return levels
 
     def _cut_functions(self, serealized_code: list):
-        serealized_code_copy = serealized_code.copy()
         functions = []
+        new_code = []
 
-        for i in range(len(serealized_code_copy)):
-            if i >= len(serealized_code_copy):
-                continue
-            line = serealized_code_copy[i]
-            if type(line) == dict:
-                key = list(line.keys())[0]
-                value = list(line.values())[0]
+        for line in serealized_code:
+            if isinstance(line, dict) and len(line) == 1:
+                key = next(iter(line))
+                value = line[key]
+
                 if 'def' in key:
-                    functions.append(line)
-                    functions += self._cut_functions(value).copy()
-                    serealized_code.pop(
-                        i - (len(serealized_code_copy) - len(serealized_code)))
+                    inner_functions = self._cut_functions(value)
+                    value.insert(0, "Start")
+                    value.append("End")
+                    functions.append({key: value})
+                    functions.extend(inner_functions)
+                else:
+                    new_code.append(line)
+            else:
+                new_code.append(line)
+
+        serealized_code.clear()
+        serealized_code.extend(new_code)
 
         return functions
 

@@ -1,5 +1,7 @@
 def square(x):
-    return x * x
+    def multiply(y):
+        return y * y
+    return multiply(x)
 
 
 result = square(4)
