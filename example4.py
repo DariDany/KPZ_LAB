@@ -1,41 +1,34 @@
 def check_number_range(number):
     if number < 0:
-        return "Отрицательное число"
+        return "Від'ємне число"
     else:
         if 0 <= number <= 10:
-            return "Число от 0 до 10"
+            return "Число від 0 до 10"
         else:
             if 11 <= number <= 20:
-                return "Число от 11 до 20"
+                return "Число від 11 до 20"
             else:
-                return "Число больше 20"
+                return "Число більше 20"
 
 
 def process_numbers():
-    numbers = []
-    while True:
-        try:
-            num = int(input("Введите число (или 'q' для выхода): "))
-            numbers.append(num)
-        except ValueError:
-            print("Неверный ввод. Введите целое число.")
+    # Фіксований список чисел
+    numbers = [5, -3, 12, 25, 8, 19]
 
-        cont = input("Хотите продолжить? (y/n): ")
-        if cont.lower() != 'y':
-            break
-
-    # Обрабатываем все введенные числа
-    for number in numbers:
+    # Обробка всіх чисел за допомогою for i in range(a, b)
+    for i in range(0, len(numbers)):  # цикл по індексах списку
+        number = numbers[i]
         result = check_number_range(number)
         print(f"Число {number} - {result}")
 
-    # Вложенные циклы для вывода результатов
-    print("\nТаблица результатов:")
-    for number in numbers:
-        for i in range(1, 6):
-            print(f"{number} x {i} = {number * i}")
+    # Вкладені цикли для виведення таблиці множення
+    print("\nТаблиця результатів:")
+    for i in range(0, len(numbers)):  # цикл по індексах списку
+        number = numbers[i]
+        for j in range(1, 6):  # цикл для множення
+            print(f"{number} x {j} = {number * j}")
         print("---------")
 
 
-# Запуск программы
+# Запуск програми
 process_numbers()

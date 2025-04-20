@@ -52,7 +52,6 @@ class PyPreprocessor(Preprocessor):
 
                 if 'def' in key:
                     inner_functions = self._cut_functions(value)
-                    value.insert(0, "Start")
                     value.append("End")
                     functions.append({key: value})
                     functions.extend(inner_functions)

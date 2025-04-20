@@ -44,11 +44,10 @@ class Py2PseudoCode(PseudoCode):
                 pseudocode += ''
             elif line.startswith('for '):
                 match = re.match(
-                    r'for\s+(\w+)\s+in\s+range\(([^,]+),\s*([^)]+)\):', line)
-
+                    r'for\s+(\w+)\s+in\s+range\(\s*(.+?)\s*,\s*(.+?)\s*\):', line)
                 if match:
                     var, start, end = match.groups()
-                    # Преобразуем "range(1, 6)" в "i <= 6"
+                    # Преобразуем "range(0, len(numbers))" в "i <= len(numbers)"
                     pseudocode += f'{var} <= {end}\n'
                 else:
                     pseudocode += line.rstrip(':') + '\n'

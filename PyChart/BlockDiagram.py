@@ -1,6 +1,7 @@
 import re
 import uuid
 from abc import ABC, abstractmethod
+from collections import defaultdict
 
 
 class BlockDiagram(ABC):
@@ -276,7 +277,7 @@ class BlockDiagram(ABC):
                     self._last_if_id_list.pop()
                 elif 'for ' in key:
                     match = re.match(
-                        r'for\s+(\w+)\s+in\s+range\(([^,]+),\s*([^)]+)\):', key)
+                        r'for\s+(\w+)\s+in\s+range\(\s*(.+?)\s*,\s*(.+?)\s*\):', key)
 
                     if match:
                         loop_var = match.group(1)
